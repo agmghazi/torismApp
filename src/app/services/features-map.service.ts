@@ -34,7 +34,6 @@ export class FeaturesMapService {
   public UtilitiesServiceUrl =
     environment.arcgisServerUrl + 'Utilities/Geometry/GeometryServer';
 
-
   FeaturePointsTourism(mapInstance: Map, trans: number) {
     let PointSymbol:any = {
       type: "simple",
@@ -90,7 +89,6 @@ export class FeaturesMapService {
     });
     mapInstance.add(this.PolygonTourism);
   }
-
 
   getCurrentLocation() {
     navigator.geolocation.getCurrentPosition((pos) => {

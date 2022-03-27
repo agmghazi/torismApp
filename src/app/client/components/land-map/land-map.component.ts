@@ -46,10 +46,7 @@ export class LandMapComponent implements OnInit {
   mapStyle = '';
   featureGraphic: any;
   isContactMeOpen = false;
-  isCreatErrorsReport = false;
-  @ViewChild('popupButtonClose') popupButtonClose: ElementRef<HTMLElement>;
   @ViewChild('mapDiv', {static: false}) mapDiv: ElementRef;
-  toggleBaseMapVariable: boolean = false;
 
   constructor(private zone: NgZone, private featuresService: FeaturesMapService, private mapComponent: MapComponent,
               private modalService: NgbModal, private ngxLoader: NgxUiLoaderService, private activeModal: NgbActiveModal,
@@ -221,18 +218,19 @@ export class LandMapComponent implements OnInit {
     this.featuresService.view.on('click', (event) => {
       this.featuresService.view.hitTest(event).then((response) => {
         if (response.results.length) {
-          let graphic = response.results.filter((result) => {
+          let graphicPointsTourism = response.results.filter((result) => {
             return result.graphic.layer === this.featuresService.PointsTourism;
           });
-          // console.log(graphic);
-          if (graphic.length > 0) {
-            this.featureGraphic = graphic[0].graphic;
+          // console.log(graphicPointsTourism);
+          if (graphicPointsTourism.length > 0) {
+            this.featureGraphic = graphicPointsTourism[0].graphic;
             if (!this.modalService.hasOpenModals()) {
               const modalRef = this.modalService.open(CreateNewFeatureComponent, {
                 windowClass: 'modal-popUP',
                 backdrop: false,
                 scrollable: true
               });
+              console.log('this.featureGraphic',this.featureGraphic);
               modalRef.componentInstance.drawFeatureGraphic = this.featureGraphic;
             }
           }

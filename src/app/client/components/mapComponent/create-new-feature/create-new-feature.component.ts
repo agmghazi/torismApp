@@ -20,6 +20,7 @@ export class CreateNewFeatureComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     console.log(this.drawFeatureGraphic);
+    console.log(this.drawFeatureGraphic.attributes.Name);
   }
 
 
