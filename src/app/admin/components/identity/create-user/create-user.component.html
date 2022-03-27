@@ -1,0 +1,175 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h5>اضافة مستخدم جديد</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="createUserForm" (ngSubmit)="saveUserData()">
+        <div class="row">
+          <div class="col">
+
+            <div class="form-group row">
+              <label for="username"><span class="invisible">...</span>اسم المستخدم</label>
+              <div class="col-sm-8">
+                <input type="text" id="username" class="form-control" formControlName="username">
+
+                <div *ngFor="let validation of account_validation_messages.username">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('username').hasError(validation.type) && (createUserForm.get('username').dirty || createUserForm.get('username').touched)">
+                    {{validation.message}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="projectName"><span class="invisible">.........</span>الاسم كامل</label>
+              <div class="col-sm-8">
+                <input type="text" id="fullName" class="form-control" formControlName="fullName">
+
+                <div *ngFor="let validation of account_validation_messages.fullName">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('fullName').hasError(validation.type) && (createUserForm.get('fullName').dirty || createUserForm.get('fullName').touched)">
+                    {{validation.message}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="projectName">البريد الالكترونى</label>
+              <div class="col-sm-8">
+                <input type="text" id="email" pattern="" class="form-control" formControlName="email">
+
+                <div *ngFor="let validation of account_validation_messages.email">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('email').hasError(validation.type) && (createUserForm.get('email').dirty || createUserForm.get('email').touched)">
+                    {{validation.message}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="totalBudget"><span class="invisible">........</span>رقم الهاتف </label>
+              <div class="col-sm-8">
+                <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber">
+
+                <div *ngFor="let validation of account_validation_messages.phoneNumber">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('phoneNumber').hasError(validation.type) && (createUserForm.get('phoneNumber').dirty || createUserForm.get('phoneNumber').touched)">
+                    {{validation.message}}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="form-group row">
+              <label for="totalBudget"><span class="invisible">....</span>الكود الوظيفى </label>
+              <div class="col-sm-8">
+                <input type="text" id="userJobCode" class="form-control" formControlName="userJobCode">
+
+                <div *ngFor="let validation of account_validation_messages.userJobCode">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('userJobCode').hasError(validation.type) && (createUserForm.get('userJobCode').dirty || createUserForm.get('userJobCode').touched)">
+                    {{validation.message}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="initialBudget"><span class="invisible">................</span>الوظيفة</label>
+              <div class="col-sm-8">
+                <input type="text" id="userJobType" class="form-control" formControlName="userJobType">
+
+                <div *ngFor="let validation of account_validation_messages.userJobType">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('userJobType').hasError(validation.type) && (createUserForm.get('userJobType').dirty || createUserForm.get('userJobType').touched)">
+                    {{validation.message}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="password"><span class="invisible">..............</span>كلمه السر</label>
+              <div class="col-sm-8">
+                <input type="password" id="password" class="form-control" formControlName="password">
+
+                <div *ngFor="let validation of account_validation_messages.password">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('password').hasError(validation.type) && (createUserForm.get('password').dirty || createUserForm.get('password').touched)">
+                    {{validation.message}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <label for="confirmPassword"><span class="invisible">...</span>تاكيد كلمه السر</label>
+              <div class="col-sm-8">
+                <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
+
+                <div *ngFor="let validation of account_validation_messages.confirmPassword">
+                  <div class="text-danger"
+                       *ngIf="createUserForm.get('confirmPassword').hasError(validation.type) && (createUserForm.get('confirmPassword').dirty || createUserForm.get('confirmPassword').touched)">
+                    {{validation.message}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="Role"><span class="invisible">.............</span>الصلاحيه</label>
+          <div class="col-sm-4">
+
+            <select class="custom-select" formControlName="Role">
+              <option value="">اختر الصلاحيه</option>
+              <option *ngFor="let role of this.roles" [ngValue]="role.name">
+                {{role.name}}
+              </option>
+            </select>
+
+            <!-- <div class="form-check" *ngFor="let role of this.roles">
+              <input class="form-check-input" type="radio" formControlName="Role" name="Role" value="{{role.name}}"
+                id="Role">
+              <label class="form-check-label" for="Role">
+                {{role.name}}
+              </label>
+            </div> -->
+
+            <div *ngFor="let validation of account_validation_messages.Role">
+              <div class="text-danger"
+                   *ngIf="createUserForm.get('Role').hasError(validation.type) && (createUserForm.get('Role').dirty || createUserForm.get('Role').touched)">
+                {{validation.message}}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="container mt-4 d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary btn-lg" style="font-size: 20px;width: 200px;"
+                  [disabled]="this.createUserForm.invalid">حفظ
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

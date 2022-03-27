@@ -1,0 +1,116 @@
+<ng-container *ngIf="!this.destoryComponent">
+  <div class="dataTable">
+    <div class="card mt-3">
+      <div class="card-body overViewAuto">
+        <form *ngIf="isLoaded">
+          <div class="row form-group form-inline mx-0">
+            <div class="col">
+              <div class="row align-items-center">
+                <span>البحث:</span>
+                <input class="col form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+                <span class="ml-3" *ngIf="service.loading$ | async">جاري تحميل البيانات .....</span>
+              </div>
+            </div>
+            <div class="col text-primary cursorPointer" style="text-align: left">
+              <app-feather-icons icon="printer" (click)=exportExcel()></app-feather-icons>
+              <img src="/assets/pngIcons/cancel.png"   (click)="this.destoryComponent = !this.destoryComponent" class="ml-3 pngIcons cursorPointer">
+            </div>
+          </div>
+
+          <table class="table table-striped" id="data-table" #dataTable>
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <ng-container *ngFor="let header of tableHeaders | keyvalue: returnZero">
+                <th scope="col" sortable="{{header.key}}" (sort)="onSort($event)"
+                    *ngIf="header.key !== 'details'; else detailsHeader">
+                  <span>{{header.value}}</span>
+                  <span class="arrow"><app-feather-icons icon="arrow-up"></app-feather-icons></span>
+                </th>
+                <ng-template #detailsHeader>
+                  <th scope="col">
+                    <span style="cursor: auto">{{header.value}}</span>
+                  </th>
+                </ng-template>
+              </ng-container>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dataItem of data | async; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <ng-container *ngFor="let item of dataItem | keyvalue: returnZero">
+                <td
+                  *ngIf="item.key == 'ad_Id' || item.key == 'ad_subtype' || item.key == 'city_Name' || item.key == 'ad_expiration' || item.key == 'district_Name'">
+                  <a *ngIf="item.value.hasOwnProperty('url'); else textOnly" routerLink="{{item.value.url}}">
+                    <ngb-highlight
+                      [result]="item.value.txt"
+                      [term]="service.searchTerm"
+                    ></ngb-highlight>
+                  </a>
+                  <ng-template #textOnly>
+                    <ngb-highlight
+                      [result]="item.value"
+                      [term]="service.searchTerm"
+                      (click)="sendToSearch(item.value)"
+                      class="cursorPointer"
+                    ></ngb-highlight>
+                  </ng-template>
+                </td>
+                <ng-container *ngIf="item.key == 'updateAddDate'">
+                  <td>
+                    <app-feather-icons icon="refresh-cw" class="cursorPointer"
+                                       (click)="viewReport(dataItem.ad_Id,'updateAddDate','display',i)"></app-feather-icons>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="item.key == 'zoomToLocation'">
+                  <td>
+                    <app-feather-icons icon="zoom-in" class="cursorPointer"
+                                       (click)="viewReport(dataItem.ad_Id,'zoomToLocation','display',i)"></app-feather-icons>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="item.key == 'shareToWhatsup'">
+                  <td>
+                    <app-feather-icons icon="share-2" class="cursorPointer"
+                                       (click)="viewReport(dataItem.ad_Id,'shareToWhatsup','display',i)"></app-feather-icons>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="item.key == 'goToGoogleMap'">
+                  <td>
+                    <app-feather-icons icon="map-pin" class="cursorPointer"
+                                       (click)="viewReport(dataItem.ad_Id,'goToGoogleMap','display',i)"></app-feather-icons>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="item.key == 'deleteAdd'">
+                  <td>
+                    <app-feather-icons icon="trash-2" class="cursorPointer"
+                                       (click)="viewReport(dataItem.ad_Id,'deleteAdd','display',i)"></app-feather-icons>
+                  </td>
+                </ng-container>
+              </ng-container>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="(total$ | async)!"
+              [(page)]="service.page"
+              [pageSize]="service.pageSize"
+              [maxSize]="5"
+            >
+            </ngb-pagination>
+
+            <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+              <option [ngValue]="10">10 عناصر</option>
+              <option [ngValue]="20">20 عناصر</option>
+              <option [ngValue]="30">30 عناصر</option>
+              <option [ngValue]="40">40 عناصر</option>
+              <option [ngValue]="50">50 عناصر</option>
+            </select>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>

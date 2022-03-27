@@ -1,0 +1,45 @@
+<div class="col-md-12" id="searchResult">
+  <div class="card">
+    <div class="card-header">
+      <h5> بيانات المستخدمين</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <button type="button" class="btn btn-success mb-4" routerLink="/home/components/identity/create-user">انشاء
+          مستخدم
+          جديد
+        </button>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">#</th>
+            <th scope="col">اسم المستخدم</th>
+            <th scope="col">الاسم كامل</th>
+            <th scope="col">رقم الجوال</th>
+            <th scope="col">البريد الالكترونى</th>
+            <th scope="col">الكود الوظيفى</th>
+            <th scope="col">المسمى الوظيفى</th>
+            <th scope="col">الدور</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of userList; let i = index;" class="glow-on-hover">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{user.userName}}</td>
+            <!-- <a routerLink="/home/global-Components/trans/goto-details/requestId">
+              <td>{{user.userName}}</td>
+            </a> -->
+            <td>{{user.fullName}}</td>
+            <td>{{user.phoneNumber}} </td>
+            <td>{{user.email}}</td>
+            <td>{{user.userJobCode}}</td>
+            <td>{{user.userJobType}}</td>
+            <td>{{user.roles.join(',')}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

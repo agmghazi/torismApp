@@ -1,0 +1,29 @@
+ng update @angular/core@11 @angular/cli@11.2.14
+
+npm  uninstall angular-datatables
+
+ng build --prod --base-href /TourismApp/
+
+
+ng build --output-path dist --watch
+
+
+ ng g guard loginGuard
+
+http-server -p 8080 -c-1 dist/TourismApp
+
+
+//create new module //lazy loading
+ng g m admin --routing
+
+//for open https
+openssl req -new -x509 -newkey rsa:2048 -sha256 -nodes -keyout localhost.key -days 3560 -out localhost.crt -config certificate.cnf
+
+ng serve --no-live-reload
+ng serve --ssl
+
+//check package module not use
+npm install depcheck -g
+depcheck
+
+https://www.google.com/maps/place/29.6381006522452,43.5597148011699

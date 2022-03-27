@@ -1,0 +1,62 @@
+<div class="signin-wrapper">
+  <div class="signin-box">
+    <div class="signin-box__brand">
+      <img src="../../../assets/pngIcons/register.png" alt="brand-image" height="170">
+
+    </div>
+    <div class="site-title mt-4">
+
+      <h5>تسجيل مستخدم جديد</h5>
+    </div>
+    <div class="signin-box__form">
+      <div *ngIf="this.errorMessage != null && this.errorMessage != ''">
+        <div class="alert alert-danger">
+          {{this.errorMessage}}
+        </div>
+      </div>
+      <form name="loginForm" [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
+        <div class="form-group">
+          <label for="userName">اسم المستخدم</label>
+          <input type="text" id="userName" class="form-control" formControlName="userName" autofocus>
+        </div>
+        <div class="form-group">
+          <label for="password">كلمة المرور</label>
+          <input type="password" id="password" class="form-control" formControlName="password">
+          <div class = "alert alert-danger" *ngIf="registerForm.get('confirmPassword').hasError('minlength')||registerForm.get('confirmPassword').hasError('maxlength')">
+            <div *ngIf="registerForm.get('password').hasError('minlength')" >يجب ان يكون عدد المدخل اكثر من ٦</div>
+            <div *ngIf="registerForm.get('password').hasError('maxlength')" >يجب ان لا يتعدي المدخل عن ١٠٠</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">تاكيد كلمه المرور</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" [class.ng-invalid] = "registerForm.hasError('notSame')">
+          <div class = "alert alert-danger" *ngIf="registerForm.get('confirmPassword').hasError('minlength')||registerForm.get('confirmPassword').hasError('maxlength')||registerForm.hasError('notSame')">
+            <div *ngIf="registerForm.get('confirmPassword').hasError('minlength')" >يجب ان يكون عدد المدخل اكثر من ٦</div>
+            <div *ngIf="registerForm.get('confirmPassword').hasError('maxlength')">يجب ان لا يتعدي المدخل عن ١٠٠</div>
+            <div *ngIf="registerForm.hasError('notSame')" > يجب ان يتطابق كلمه المرور مع تاكيد كلمه المرور</div>
+          </div>
+        </div>
+        <div class="form-action text-center">
+          <button class="btn btn-primary" [disabled]="registerForm.invalid"  type="submit">تسجيل</button>
+        </div>
+      </form>
+      <div class="mt-2 cursorPointer" style="height: 126px !important;">
+        <div class="row">
+          <div class="col-sm-12 login-options">
+            <a class="align-items-center d-flex pl-1 pr-1" (click)="goToAbsher()">
+              <div class="item-img border-left mb-2 ml-3"> <img src="../../../assets/images/NIClogo.png"  alt="logo"></div>
+              <div class="item-content text-center"><span class="title">عن طريق حسابك في منصة النفاذ الوطني الموحد</span></div>
+            </a>
+          </div>
+          <div class="col">
+            <a class="nav-link text-info cursorPointer" routerLink="/auth/login">
+              <app-feather-icons [icon]="'log-in'" class="card-title text-primary aClass h6 cursorPointer"
+              ></app-feather-icons>
+              <span class="linkNavUrl h6">تسجيل دخول</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

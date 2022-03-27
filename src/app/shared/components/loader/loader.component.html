@@ -1,0 +1,24 @@
+<div class="loader-wrapper" [class.loderhide]="!show">
+  <div class="loader-index"><span></span></div>
+  <svg>
+    <defs>
+      <filter id="goo" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12"/>
+        <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/>
+        <feBlend in="SourceGraphic" in2="goo"/>
+      </filter>
+    </defs>
+  </svg>
+  <div role="img" style="filter: url('#goo')">
+    <svg width="50rem" height="50rem">
+      <circle cx="50%" cy="50%" r="30"/>
+      <circle cx="50%" cy="50%" r="25"/>
+      <circle cx="50%" cy="50%" r="25"/>
+      <circle cx="50%" cy="50%" r="25"/>
+      <circle cx="50%" cy="50%" r="25"/>
+    </svg>
+  </div>
+</div>
+
+
+

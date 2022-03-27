@@ -1,0 +1,189 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.material-icons, .material-icons-outlined {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: rtl;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.big-mat-icon {
+  font-size: 35px;
+}
+
+@import "./assets/scss/app.scss";
+@import "./assets/scss/rowHover.scss";
+
+//define color all over project
+.router-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: calc(100% - 47px);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+:host {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #60d7a9;
+}
+
+ngb-datepicker {
+  width: 25rem;
+}
+
+.ngb-dp-week.ngb-dp-weekdays,
+.ngb-dp-week {
+  width: 25rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row-reverse;
+}
+
+ngb-datepicker-navigation {
+  flex-direction: row-reverse;
+}
+
+ngb-datepicker-navigation-select > .custom-select {
+  direction: initial;
+}
+
+.ngb-dp-arrow {
+  flex-direction: row-reverse;
+}
+
+.modal-popUP {
+  width: 375px !important;
+  margin: 0 auto !important;
+  left: unset !important;
+  right: 8px !important;
+  top: 60px !important;
+  height: 80% !important;
+}
+
+.modal-popUPDetails {
+  width: 303px !important;
+  margin: 0 auto !important;
+  right: -24px !important;
+  top: 60px !important;
+  height: 80% !important;
+}
+
+.card .card-body {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  transition: 0.3s !important;
+}
+
+.card .card-body:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.cartP {
+  text-align: center !important;
+  font-size: 12px !important;
+}
+
+.modal-footer {
+  justify-content: flex-start !important;
+}
+
+.zakyLogo {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 50px;
+}
+
+.input-error {
+  outline: red .1px solid;
+}
+
+.esri-ui-manual-container > .esri-component {
+  visibility: hidden !important;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.overViewAuto {
+  overflow: auto;
+}
+
+.navbar-toggler {
+  background-color: #6294C2 !important;
+}
+
+.pngIcons {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+
+@media only screen and (max-width: 991px) {
+  [main-theme-layout=rtl] .page-wrapper.compact-wrapper .page-main-header.close_icon {
+    background-color: transparent ;
+    box-shadow: unset !important;
+    //height: 1px !important;
+    margin: unset !important;
+    //display:unset !important;
+  }
+  .mobileNavClass{
+    color: transparent !important;
+  }
+  .client-body{
+    margin-top: 1px !important;
+  }
+  //.collapse navbar-collapse show{
+  //  background-color: #007ac2 !important;
+  //}
+
+}
+
+
+
+//popup table
+.popupTableInfo {
+  font-family: "Avenir Next", "Helvetica Neue", "Helvetica", "Arial",
+  "sans-serif";
+  border-collapse: collapse;
+  width: 100%;
+  direction: rtl;
+}
+
+.popupTableInfo td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: right;
+}
+
+.popupTableInfo tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.popupTableInfo tr:hover {
+  background-color: #ddd;
+}
+

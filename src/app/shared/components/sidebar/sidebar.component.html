@@ -1,0 +1,106 @@
+<!-- Page Sidebar Start-->
+<div class="logo-wrapper"><a routerLink="/home">
+  <img src="../../../../assets/images/zakyLogo.png" alt="Brand image" ></a>
+</div>
+<nav>
+  <div class="main-navbar">
+    <div id="mainnav">
+      <!--      {{menuItems | json}}-->
+
+      <ul class="navigation-menu custom-scrollbar" *ngFor="let menuItem of menuItems" [ngClass]="{active: menuItem.active}">
+
+        <li class="navigation-menu__item"  *ngIf="menuItem.roles">
+          <!-- Sub -->
+          <a mdbWavesEffect activateParent href="javascript:void(0)" class="navigation-menu__item__link"
+             [ngClass]="{active: menuItem.active && menuItem.roles}" *ngIf="menuItem.type === 'sub'" (click)="toggletNavActive(menuItem)">
+
+            <app-feather-icons [icon]="menuItem.icon"></app-feather-icons>
+
+            <span>{{menuItem.title}}</span>
+
+            <div class="according-menu">
+              <i class="fa fa-angle-{{menuItem.active ? 'down' : 'right'}} pull-right" *ngIf="menuItem.children"></i>
+            </div>
+          </a>
+
+          <!-- Link -->
+          <a (click)="toggletNavActive(menuItem)" [routerLink]="!menuItem.type ? null : [menuItem.path]"
+             routerLinkActive="active" class="navigation-menu__item__link" [ngClass]="{active: menuItem.active}"
+             *ngIf="menuItem.type === 'link'">
+            <app-feather-icons [icon]="menuItem.icon"></app-feather-icons>
+            <span>{{menuItem.title}}</span>
+            <div class="according-menu">
+              <i class="fa fa-angle-{{menuItem.active ? 'down' : 'right'}} pull-right" *ngIf="menuItem.children && menuItem.roles"></i>
+            </div>
+          </a>
+
+          <!-- 2nd Level Menu -->
+          <ul class="child-menu" [ngClass]="{active: menuItem.active}"
+              [ngClass]="{'open': menuItem.active, 'menu-close': !menuItem.active }" *ngIf="menuItem.children && menuItem.roles"
+              [style.display]="menuItem.active ? 'block' : 'none'">
+
+            <li class="child-menu__item" *ngFor="let childrenItem of menuItem.children "
+                [ngClass]="{active: childrenItem.active}">
+              <!-- Link -->
+
+              <a mdbWavesEffect class="child-menu__item__link"
+                 [routerLink]="!childrenItem.type ? null : [childrenItem.path]" *ngIf="childrenItem.type === 'link' && childrenItem.roles"
+                 routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" activateParent>
+                <span>{{childrenItem.title}}
+
+                  <!--                  <span *ngIf="childrenItem.title == 'الطلبات الواردة' "-->
+                  <!--                        class="badge badge-warning  badge-pill">{{this.orderInActive}}</span>-->
+
+                     <span *ngIf="childrenItem.title == 'الطلبات الواردة' "></span>
+
+                </span>
+
+              </a>
+
+              <!-- Sub -->
+              <a mdbWavesEffect activateParent href="javascript:void(0)" class="navigation-menu__item__link"
+                 [ngClass]="{active: childrenItem.active}" *ngIf="childrenItem.type === 'sub' && childrenItem.roles" [style.paddingRight]="'40px'" (click)="toggletNavActive(childrenItem)">
+
+                <app-feather-icons [icon]="childrenItem.icon"></app-feather-icons>
+
+                <span>{{childrenItem.title}}</span>
+
+                <div class="according-menu">
+                  <i class="fa fa-angle-{{childrenItem.active ? 'down' : 'right'}} pull-right" *ngIf="childrenItem.children && childrenItem.roles"></i>
+                </div>
+
+              </a>
+
+              <ul
+                class="child-menu"
+                [ngClass]="{active: childrenItem.active}"
+                [ngClass]="{'open': childrenItem.active, 'menu-close': !childrenItem.active }"
+                *ngIf="childrenItem.children && childrenItem.roles"
+                [style.display]="childrenItem.active ? 'block' : 'none'"
+              >
+
+                <li
+                  class="child-menu__item"
+                  *ngFor="let child of childrenItem.children"
+                  [ngClass]="{active: child.active}"
+                >
+                  <a
+                    mdbWavesEffect
+                    class="child-menu__item__link"
+                    [routerLink]="!child.type ? null : [child.path]"
+                    *ngIf="child.type === 'link' && child.roles"
+                    routerLinkActive="active"  [style.paddingRight]="'55px'"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    activateParent
+                  >
+                    {{child.title}}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,85 @@
+.legendImage {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  height: 140px;
+  z-index: 2;
+}
+
+.basemapImage {
+  position: absolute;
+  top: 58px;
+  left: 23px;
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+}
+
+.getLocationImage {
+  position: absolute;
+  top: 100px;
+  left: 16px;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+}
+
+.legendHover{
+  position: absolute;
+  top: 157px;
+  left: 20px;
+  width: 35px;
+  height: 35px;
+}
+
+
+.zakyLogo {
+  position: absolute;
+  bottom: 35px;
+  left: 44%;
+  height: 50px;
+}
+
+.operationsDiv {
+  position: absolute;
+  top: 0;
+  left: 70%;
+  padding-top: 4px;
+  right: 7px;
+  border: 1px dotted #6294C2;
+  margin-top: 29px !important;
+}
+
+.buttonsOperation {
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #f1f0ea;
+  border: 1px dotted #6294C2;
+}
+
+.HorizontalSearch{
+  border-radius: 4px;
+  margin-left: -215px;
+  padding-right: 10px;
+  padding-bottom: 13px;
+  background-color: #f1f0ea;
+  border: 1px dotted #6294C2;
+}
+
+.advancedSearch{
+  border-radius: 4px;
+  margin-left: -215px;
+  padding-right: 10px;
+  padding-bottom: 13px;
+  background-color: #f1f0ea;
+  padding-top: 5px;
+  border: 1px dotted #6294C2;
+}
+
+.dataTable{
+  position: fixed;
+  bottom: 0px;
+  background-color: white;
+  width: 100%;
+}

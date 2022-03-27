@@ -1,0 +1,34 @@
+<div class="page-main-header" [ngClass]="{'close_icon': navServices.collapseSidebar}">
+  <div class="main-header-right row m-0  justify-content-between">
+    <div class="toggle-sidebar">
+      <app-feather-icons [icon]="'grid'" (click)=collapseSidebar()></app-feather-icons>
+    </div>
+    <div style="color: white;">
+      <h5>نظام ذكي</h5>
+    </div>
+    <div class="nav-right right-menu">
+      <div ngbDropdown class="d-inline-block user-profile-dropdown">
+        <button class="btn btn-primary dropdown-toggler" id="dropdownBasic1" ngbDropdownToggle>
+          <span class="user-icon-before">
+            <i class="fa fa-user-circle"></i>
+          </span>
+          <span class="user-label">{{userName}}</span>
+        </button>
+        <div ngbDropdownMenu class="dropdown-items" aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem routerLink="/admin/panel/identity/EditCurrentUser">
+            <i data-feather="user"></i>
+            <span>اعدادات الحساب</span>
+          </button>
+          <button ngbDropdownItem routerLink="/admin/panel/identity/ChangePasswordCurrentUser">
+            <i data-feather="key"></i>
+            <span>تغير كلمه المرور</span>
+          </button>
+          <button ngbDropdownItem (click)="onLogout()">
+            <i data-feather="log-in"></i>
+            <span>تسجيل خروج </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

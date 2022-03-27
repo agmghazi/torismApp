@@ -1,0 +1,28 @@
+th {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.desc, th.asc {
+  background-color: #0a3125;
+}
+
+.arrow {
+  display: none;
+}
+
+th.desc>.arrow, th.asc>.arrow {
+  display: block;
+  width: 22px;
+  height: 22px;
+  float: left;
+}
+
+th.desc>.arrow {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+}
+
+a {
+  font-weight: bolder;
+}

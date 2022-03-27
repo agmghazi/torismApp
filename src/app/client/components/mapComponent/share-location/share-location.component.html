@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <div class="modal-title">
+    <h6 *ngIf="this.featureGraphic.attributes.Land_Number">
+        القطعه رقم   {{this.featureGraphic.attributes.Land_Number}}
+    </h6>
+  </div>
+  <br>
+
+  <div class="justify-content-end" >
+    <img src="/assets/pngIcons/cancel.png" (click)="activeModal.dismiss('Cross click')" class="pngIcons">
+  </div>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-6 text-center cursorPointer" style="padding-bottom: 7px !important">
+      <div class="card border-secondary" (click)="goToGoogleMap()">
+        <div class="card-body" style="padding: 0.5rem !important;">
+          <img src="/assets/pngIcons/location.png" class="pngIcons">
+          <p class="card-text">الذهاب للموقع</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 text-center cursorPointer" style="padding-bottom: 7px !important">
+      <div class="card border-secondary" (click)="shareToWhatsapp()">
+        <div class="card-body" style="padding: 0.5rem !important;">
+          <img src="/assets/pngIcons/share.png" class="pngIcons">
+          <p class="card-text">مشاركه الموقع</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

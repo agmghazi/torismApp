@@ -1,0 +1,132 @@
+<div class="page-main-header close_icon" [ngStyle]="{'background-color':isMenuCollapsed && headerStyle  ? 'transparent' : '#6294C2'}">
+  <div class="main-header-right row m-0  justify-content-between mt-2" style="padding: unset !important;">
+    <div class="toggle-sidebar">
+      <!--      <app-feather-icons [icon]="'grid'" (click)=collapseSidebar()></app-feather-icons>-->
+    </div>
+
+
+<!--    <nav class="navbar navbar-expand-lg">-->
+<!--      <a *ngIf="!isMenuCollapsed || !headerStyle" class="navbar-brand mr-5 text-sm-right text-danger" style="color: #f5c8c8;font-weight: bold;">نسخه-->
+<!--        تجريبيه</a>-->
+
+<!--&lt;!&ndash;      <img *ngIf="!isMenuCollapsed || !headerStyle" src="/assets/images/zakyLogo.png" class="navbar-brand mr-4  zakyLogoHeader"/>&ndash;&gt;-->
+
+<!--      <a *ngIf="!isMenuCollapsed || !headerStyle" class="navbar-brand mr-4 text-sm-right" style="color: wheat;font-weight: bold;">ذكي</a>-->
+
+<!--      <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">-->
+<!--       <span style="color: white"> &#9776;</span>-->
+<!--      </button>-->
+
+<!--      <div [ngbCollapse]="isMenuCollapsed"  class="collapse navbar-collapse">-->
+<!--        <ul class="navbar-nav">-->
+
+<!--          <li class="nav-item active mr-4" *ngIf="this.isAdminLogin">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="this.redirectTo('./admin/panel/identity/all-users')">-->
+<!--              &lt;!&ndash;              <i data-feather="command" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-setting-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl"> التحكم</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4" >-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickAddNewAddLandHeaderData()">-->
+<!--              &lt;!&ndash;              <i data-feather="plus-circle" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-add-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">اضافه عقار</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4" *ngIf="this.userName">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickIsMyLandsOpenHeaderData()">-->
+<!--              &lt;!&ndash;              <i data-feather="book-open" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-house-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">عقاراتي</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4" *ngIf="this.isAdminLogin">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickIsCreatLandAddeaderData()">-->
+<!--              &lt;!&ndash;              <i data-feather="maximize-2" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-bookmark-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">الاعلانات</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4" *ngIf="this.isAdminLogin">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickAddEditMeHeaderData()">-->
+<!--              &lt;!&ndash;              <i data-feather="edit-2" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-create-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">اضافه وحذف قطعه</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickHorizontalSearchHeaderData()">-->
+<!--              &lt;!&ndash;              <i data-feather="align-justify" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-search-in-list-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">البحث الهرمي</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickAdvanceSearchMeHeaderData()">-->
+<!--              &lt;!&ndash;              <i data-feather="search" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-search-more-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">بحث متقدم</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4" *ngIf="this.userName">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickErrorsReportHeaderData()">-->
+<!--              &lt;!&ndash;              <i data-feather="flag" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-error-cloud-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">الابلاغ عن قطعه</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="onClickContactMeHeaderData()">-->
+<!--              <img src="/assets/pngIcons/icons8-internal-call-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">التواصل</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <li class="nav-item active mr-4" *ngIf="!this.userName">-->
+<!--            <a class="nav-link text-light cursorPointer" (click)="this.redirectTo('./auth/login')">-->
+<!--              &lt;!&ndash;              <i data-feather="log-in" width="20" height="18"></i>&ndash;&gt;-->
+<!--              <img src="/assets/pngIcons/icons8-login-50.png" class="pngIcons">-->
+<!--              <span class="linkNavUrl">تسجيل دخول</span>-->
+<!--            </a>-->
+<!--          </li>-->
+
+<!--          <div class="nav-right right-menu" *ngIf="this.userName">-->
+<!--            <div ngbDropdown class="d-inline-block user-profile-dropdown">-->
+<!--              <button class="btn btn-primary dropdown-toggler" id="dropdownBasic1" ngbDropdownToggle>-->
+<!--            <span class="user-icon-before">-->
+<!--            <i class="fa fa-user-circle"></i>-->
+<!--          </span>-->
+<!--                <span class="user-label">{{userName}}</span>-->
+<!--              </button>-->
+<!--              <div ngbDropdownMenu class="dropdown-items" aria-labelledby="dropdownBasic1">-->
+<!--                <button ngbDropdownItem routerLink="./client/panel/identity/EditCurrentUser">-->
+<!--                  <i data-feather="user"></i>-->
+<!--                  <span>اعدادات الحساب</span>-->
+<!--                </button>-->
+<!--                <button ngbDropdownItem routerLink="./client/panel/identity/ChangePasswordCurrentUser">-->
+<!--                  <i data-feather="key"></i>-->
+<!--                  <span>تغير كلمه المرور</span>-->
+<!--                </button>-->
+<!--                <button ngbDropdownItem (click)="onLogout()">-->
+<!--                  <i data-feather="log-in"></i>-->
+<!--                  <span>تسجيل خروج </span>-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </nav>-->
+
+  </div>
+</div>

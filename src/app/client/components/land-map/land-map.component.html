@@ -1,0 +1,10 @@
+<div #mapDiv >
+  <app-map [mapStyle]=this.mapStyle class="mapClass"></app-map>
+
+  <img src="./assets/pngIcons/icons8-location-50.png" class="basemapImage" (click)="runAnimation()">
+<div *ngIf="isContactMeOpen">
+  <app-contact-me></app-contact-me>
+</div>
+
+</div>
+

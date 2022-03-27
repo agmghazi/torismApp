@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <div class="justify-content-start">
+
+    <h4 class="modal-title">
+      الاسم  {{this.drawFeatureGraphic.attributes.Name}} </h4>
+  </div>
+  <div class="justify-content-end">
+    <img src="/assets/pngIcons/cancel.png" (click)="activeModal.dismiss('Cross click')" class="pngIcons cursorPointer">
+  </div>
+</div>
+<div class="modal-body">
+  <table class="popupTableInfo">
+    <tr>
+      <td>المحطه</td>
+      <td>{{this.drawFeatureGraphic.attributes.Name}}</td>
+    </tr>
+    <tr>
+      <td>صور</td>
+      <td>ووووو</td>
+    </tr>
+    <tr>
+      <td>الفيديو</td>
+      <td>ووووو</td>
+    </tr>
+
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click')">اغلاق</button>
+</div>
