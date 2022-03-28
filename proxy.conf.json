@@ -1,12 +1,12 @@
 {
   "/api/*": {
-    "target": "https://thki.sa",
+    "target": "",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/arcgis/*": {
-    "target": "https://thki.sa",
+    "target": "",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

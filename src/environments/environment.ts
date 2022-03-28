@@ -9,5 +9,5 @@ export const environment = {
   arcgisServerPortUrl: 'https://thki.sa/arcgis/rest/services/',
   generateToken: 'https://thki.sa/arcgis/tokens/generateToken',
   serverName:"/arcgis",
-  keyArcGIS:"2587"
+  keyArcGIS:"222222"
 };
