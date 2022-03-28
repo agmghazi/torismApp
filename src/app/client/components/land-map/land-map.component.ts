@@ -35,9 +35,9 @@ import SpatialReference from '@arcgis/core/geometry/SpatialReference';
 import ProjectParameters from '@arcgis/core/rest/support/ProjectParameters';
 import Point from '@arcgis/core/geometry/Point';
 import GeometryService from '@arcgis/core/tasks/GeometryService';
-import Sketch from "@arcgis/core/widgets/Sketch";
+import Sketch from '@arcgis/core/widgets/Sketch';
 import * as geometryEngineAsync from '@arcgis/core/geometry/geometryEngineAsync';
-import Search from "@arcgis/core/widgets/Search";
+import Search from '@arcgis/core/widgets/Search';
 
 @Component({
   selector: 'app-land-map',
@@ -46,11 +46,14 @@ import Search from "@arcgis/core/widgets/Search";
   providers: [NgbModalConfig, NgbModal]
 })
 export class LandMapComponent implements OnInit {
+  type: 'facebook' | 'twitter';
+  shareUrl: string="http://localhost:4200/client/home/landMap";
+  navUrl: string;
   mapStyle = '';
   featureGraphic: any;
   isContactMeOpen = false;
   lineMeasurements;
-  getInforamtions:boolean=false
+  getInforamtions: boolean = false;
   @ViewChild('mapDiv', {static: false}) mapDiv: ElementRef;
   @ViewChild('measurements', {static: false}) measurements: ElementRef;
 
@@ -84,26 +87,27 @@ export class LandMapComponent implements OnInit {
     this.createPathsWithLength();
   }
 
-  searchBar(){
+  searchBar() {
     const searchWidget = new Search({
       view: this.featuresService.view,
-      allPlaceholder: "البحث",
+      allPlaceholder: 'البحث',
       includeDefaultSources: false,
       sources: [
         {
           // @ts-ignore
           layer: this.featuresService.PointsTourism,
-          searchFields: ["Name"],
-          displayField: "Name",
+          searchFields: ['Name'],
+          displayField: 'Name',
           exactMatch: false,
-          outFields: ["Name", "Station"],
-          name: "المعالم السياحيه",
-          placeholder: "ادخل اسم المعلم"
+          outFields: ['Name', 'Station'],
+          name: 'المعالم السياحيه',
+          placeholder: 'ادخل اسم المعلم'
         },
       ]
     });
     this.featuresService.view.ui.add(searchWidget, 'top-right');
   }
+
   runAnimation() {
     this.featuresService.view.on('click', (event) => {
       this.featuresService.view.hitTest(event).then((response) => {
@@ -134,12 +138,12 @@ export class LandMapComponent implements OnInit {
     });
   }
 
-  createPathsWithLength(){
+  createPathsWithLength() {
     const sketch = new Sketch({
       layer: this.featuresService.graphicsLayer,
       view: this.featuresService.view,
-      availableCreateTools: ["polyline"],
-      creationMode: "update",
+      availableCreateTools: ['polyline'],
+      creationMode: 'update',
       // @ts-ignore
       updateOnGraphicClick: true,
       visibleElements: {
@@ -148,8 +152,8 @@ export class LandMapComponent implements OnInit {
           circle: false
         },
         selectionTools: {
-          "lasso-selection": false,
-          "rectangle-selection": false,
+          'lasso-selection': false,
+          'rectangle-selection': false,
         },
         settingsMenu: false,
         undoRedoMenu: false
@@ -157,46 +161,48 @@ export class LandMapComponent implements OnInit {
     });
     this.featuresService.view.ui.add(sketch, 'top-right');
 
-    var root=this;
+    var root = this;
+
     function getLength(line) {
-       geometryEngineAsync.planarLength(line, "kilometers").then((result)=>{
-        root.lineMeasurements =Number(result).toFixed(2) + "كيلو متر"
+      geometryEngineAsync.planarLength(line, 'kilometers').then((result) => {
+        root.lineMeasurements = Number(result).toFixed(2) + 'كيلو متر';
       });
     }
 
     function switchType(geom) {
       switch (geom.type) {
-        case "polyline":
+        case 'polyline':
           getLength(geom);
           break;
         default:
-          console.log("No value found");
+          console.log('No value found');
       }
     }
 
-    sketch.on("update", (e) => {
+    sketch.on('update', (e) => {
       const geometry = e.graphics[0].geometry;
 
-      if (e.state === "start") {
+      if (e.state === 'start') {
         switchType(geometry);
       }
 
-      if (e.state === "complete") {
+      if (e.state === 'complete') {
         this.featuresService.graphicsLayer.remove(this.featuresService.graphicsLayer.graphics.getItemAt(0));
-        root.lineMeasurements = "";
+        root.lineMeasurements = '';
       }
 
       if (
         e.toolEventInfo &&
-        (e.toolEventInfo.type === "scale-stop" ||
-          e.toolEventInfo.type === "reshape-stop" ||
-          e.toolEventInfo.type === "move-stop")
+        (e.toolEventInfo.type === 'scale-stop' ||
+          e.toolEventInfo.type === 'reshape-stop' ||
+          e.toolEventInfo.type === 'move-stop')
       ) {
         switchType(geometry);
       }
 
     });
   }
+
   createGraphic(path: any) {
     this.featuresService.graphicsLayer.removeAll();
     let polyline: any = {
@@ -302,6 +308,7 @@ export class LandMapComponent implements OnInit {
       }
       (window as any).requestAnimationFrame(step);
     }
+
     (window as any).requestAnimationFrame(step);
   }
 
@@ -321,7 +328,7 @@ export class LandMapComponent implements OnInit {
                 backdrop: false,
                 scrollable: true
               });
-              console.log('this.featureGraphic',this.featureGraphic);
+              console.log('this.featureGraphic', this.featureGraphic);
               modalRef.componentInstance.drawFeatureGraphic = this.featureGraphic;
             }
           }
@@ -334,6 +341,23 @@ export class LandMapComponent implements OnInit {
     this.headerDataService.isContactMeOpen.subscribe((result) => {
       this.isContactMeOpen = !!result;
     });
+  }
+
+
+   createNavigationUrl(type) {
+    let searchParams = new URLSearchParams();
+    switch (type) {
+      case 'facebook':
+        searchParams.set('u', this.shareUrl);
+        this.navUrl = 'https://www.facebook.com/sharer/sharer.php?' + searchParams;
+         window.open(this.navUrl, '_blank');
+        break;
+      case 'twitter':
+        searchParams.set('url', this.shareUrl);
+        this.navUrl = 'https://twitter.com/share?' + searchParams;
+        window.open(this.navUrl, '_blank');
+        break;
+    }
   }
 
 }

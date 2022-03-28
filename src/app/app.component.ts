@@ -30,7 +30,11 @@ export class AppComponent implements OnInit {
   checker;
 
   ngOnInit(): void {
-    esriConfig.assetsPath = '/assets';
+    esriConfig.assetsPath = 'https://github.com/agmghazi/torismApp/blob/gh-pages/assets';
+    //production mode
+    // esriConfig.assetsPath = '../../../assets';
+    esriConfig.workers.workerPath =
+      'https://github.com/agmghazi/torismApp/blob/gh-pages/assets/esri/core/workers/RemoteClient.js';
     this.intervalToken();
   }
 
