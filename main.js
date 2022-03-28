@@ -2132,7 +2132,7 @@ class AppComponent {
         this.title = 'NBN App';
     }
     ngOnInit() {
-        _arcgis_core_config_js__WEBPACK_IMPORTED_MODULE_0__["default"].assetsPath = './assets';
+        _arcgis_core_config_js__WEBPACK_IMPORTED_MODULE_0__["default"].assetsPath = 'https://github.com/agmghazi/torismApp/blob/gh-pages/assets';
         this.intervalToken();
     }
     refreshToken() {
