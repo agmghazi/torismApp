@@ -1,0 +1,8 @@
+@import "~animate.css/animate.min.css";
+@import "~bootstrap/scss/bootstrap";
+@import "style";
+@import "googleapisCss";
+
+.accordion > .card .card-header .btn-link {
+  color: white !important;
+}

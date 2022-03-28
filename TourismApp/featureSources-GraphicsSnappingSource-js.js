@@ -1,0 +1,89 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["featureSources-GraphicsSnappingSource-js"],{
+
+/***/ "RXWn":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@arcgis/core/geometry/support/normalizeUtilsSync.js ***!
+  \**************************************************************************/
+/*! exports provided: normalizeCentralMeridianSync */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizeCentralMeridianSync", function() { return u; });
+/* harmony import */ var _aaBoundingRect_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./aaBoundingRect.js */ "kYAx");
+/* harmony import */ var _boundsUtils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./boundsUtils.js */ "KLE9");
+/* harmony import */ var _intersectsBase_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./intersectsBase.js */ "9UdQ");
+/* harmony import */ var _jsonUtils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./jsonUtils.js */ "qatw");
+/* harmony import */ var _normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./normalizeUtilsCommon.js */ "9w8m");
+/* harmony import */ var _spatialReferenceUtils_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./spatialReferenceUtils.js */ "f4Nx");
+/*
+All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+See https://js.arcgis.com/4.22/esri/copyright.txt for details.
+*/
+function u(n){if(!n)return null;let r=null;const u=n.spatialReference,d=Object(_spatialReferenceUtils_js__WEBPACK_IMPORTED_MODULE_5__["getInfo"])(u);if(!d)return"toJSON"in n?n.toJSON():n;const I=Object(_spatialReferenceUtils_js__WEBPACK_IMPORTED_MODULE_5__["isWebMercator"])(u)?102100:4326,g=_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["cutParams"][I].maxX,j=_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["cutParams"][I].minX,M=_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["cutParams"][I].plus180Line,N=_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["cutParams"][I].minus180Line;let O;const S="toJSON"in n?n.toJSON():n;if(Object(_jsonUtils_js__WEBPACK_IMPORTED_MODULE_3__["isPoint"])(S))O=h(S,g,j);else if(Object(_jsonUtils_js__WEBPACK_IMPORTED_MODULE_3__["isMultipoint"])(S))S.points=S.points.map((n=>h(n,g,j))),O=S;else if(Object(_jsonUtils_js__WEBPACK_IMPORTED_MODULE_3__["isExtent"])(S))O=y(S,d);else if(Object(_jsonUtils_js__WEBPACK_IMPORTED_MODULE_3__["isPolygon"])(S)||Object(_jsonUtils_js__WEBPACK_IMPORTED_MODULE_3__["isPolyline"])(S)){const n=J;Object(_boundsUtils_js__WEBPACK_IMPORTED_MODULE_1__["getBoundsXY"])(n,S);const m={xmin:n[0],ymin:n[1],xmax:n[2],ymax:n[3]},s=Object(_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["offsetMagnitude"])(m.xmin,j)*(2*g),e=0===s?S:p(S,s);m.xmin+=s,m.xmax+=s,Object(_intersectsBase_js__WEBPACK_IMPORTED_MODULE_2__["extentIntersectsPolyline"])(m,M)&&m.xmax!==g||Object(_intersectsBase_js__WEBPACK_IMPORTED_MODULE_2__["extentIntersectsPolyline"])(m,N)&&m.xmin!==j?r=e:O=e}else O=S;if(null!==r){return(new v).cut(r,g)}return O}function p(n,t){const i=Object(_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["getGeometryParts"])(n);for(const m of i)for(const n of m)n[0]+=t;return n}function y(n,t){if(!t)return n;const i=d(n,t).map((n=>n.extent));return i.length<2?i[0]||n:i.length>2?(n.xmin=t.valid[0],n.xmax=t.valid[1],n):{rings:i.map((n=>[[n.xmin,n.ymin],[n.xmin,n.ymax],[n.xmax,n.ymax],[n.xmax,n.ymin],[n.xmin,n.ymin]]))}}function h(n,t,i){if(Array.isArray(n)){const m=n[0];if(m>t){const i=Object(_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["offsetMagnitude"])(m,t);n[0]=m+i*(-2*t)}else if(m<i){const t=Object(_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["offsetMagnitude"])(m,i);n[0]=m+t*(-2*i)}}else{const m=n.x;if(m>t){const i=Object(_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["offsetMagnitude"])(m,t);n.x+=i*(-2*t)}else if(m<i){const t=Object(_normalizeUtilsCommon_js__WEBPACK_IMPORTED_MODULE_4__["offsetMagnitude"])(m,i);n.x+=t*(-2*i)}}return n}function d(n,t){const i=[],{ymin:m,ymax:s}=n,e=n.xmax-n.xmin,x=n.xmin,o=n.xmax;let a;const[r,f]=t.valid;a=I(n.xmin,t);const c=a.x,l=a.frameId;a=I(n.xmax,t);const u=a.x,p=a.frameId,y=c===u&&e>0;if(e>2*f){const n={xmin:x<o?c:u,ymin:m,xmax:f,ymax:s},t={xmin:r,ymin:m,xmax:x<o?u:c,ymax:s},e={xmin:0,ymin:m,xmax:f,ymax:s},a={xmin:r,ymin:m,xmax:0,ymax:s},y=[],h=[];g(n,e)&&y.push(l),g(n,a)&&h.push(l),g(t,e)&&y.push(p),g(t,a)&&h.push(p);for(let i=l+1;i<p;i++)y.push(i),h.push(i);i.push({extent:n,frameIds:[l]},{extent:t,frameIds:[p]},{extent:e,frameIds:y},{extent:a,frameIds:h})}else c>u||y?i.push({extent:{xmin:c,ymin:m,xmax:f,ymax:s},frameIds:[l]},{extent:{xmin:r,ymin:m,xmax:u,ymax:s},frameIds:[p]}):i.push({extent:{xmin:c,ymin:m,xmax:u,ymax:s},frameIds:[l]});return i}function I(n,t){const[i,m]=t.valid,s=2*m;let e,x=0;return n>m?(e=Math.ceil(Math.abs(n-m)/s),n-=e*s,x=e):n<i&&(e=Math.ceil(Math.abs(n-i)/s),n+=e*s,x=-e),{x:n,frameId:x}}function g(n,t){const{xmin:i,ymin:m,xmax:s,ymax:e}=t;return j(n,i,m)&&j(n,i,e)&&j(n,s,e)&&j(n,s,m)}function j(n,t,i){return t>=n.xmin&&t<=n.xmax&&i>=n.ymin&&i<=n.ymax}class v{cut(n,t){let i;if(n.rings)this.closed=!0,i=n.rings,this.minPts=4;else{if(!n.paths)return null;this.closed=!1,i=n.paths,this.minPts=2}const m=i.length,s=-2*t;for(let e=0;e<m;e++){const n=i[e];if(n&&n.length>=this.minPts){const t=[];for(const i of n)t.push([i[0]+s,i[1]]);i.push(t)}}return this.closed?n.rings=i:n.paths=i,n}}const J=Object(_aaBoundingRect_js__WEBPACK_IMPORTED_MODULE_0__["create"])();
+
+
+/***/ }),
+
+/***/ "sjSM":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/@arcgis/core/views/interactive/snapping/featureSources/GraphicsSnappingSource.js ***!
+  \*******************************************************************************************************/
+/*! exports provided: GraphicsSnappingSource */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GraphicsSnappingSource", function() { return k; });
+/* harmony import */ var _chunks_tslib_es6_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../chunks/tslib.es6.js */ "pO5D");
+/* harmony import */ var _core_Accessor_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../core/Accessor.js */ "/CmD");
+/* harmony import */ var _core_arrayUtils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../core/arrayUtils.js */ "tQ+6");
+/* harmony import */ var _core_HandleOwner_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../core/HandleOwner.js */ "kJYu");
+/* harmony import */ var _core_maybe_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../core/maybe.js */ "srIe");
+/* harmony import */ var _core_promiseUtils_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../core/promiseUtils.js */ "9MzC");
+/* harmony import */ var _core_accessorSupport_decorators_property_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/accessorSupport/decorators/property.js */ "WbKI");
+/* harmony import */ var _core_has_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/has.js */ "wSAH");
+/* harmony import */ var _core_accessorSupport_ensureType_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/accessorSupport/ensureType.js */ "zqDF");
+/* harmony import */ var _core_accessorSupport_decorators_subclass_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../core/accessorSupport/decorators/subclass.js */ "04ZG");
+/* harmony import */ var _geometry_Polygon_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../geometry/Polygon.js */ "Ehki");
+/* harmony import */ var _geometry_projection_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../geometry/projection.js */ "gYg2");
+/* harmony import */ var _geometry_support_normalizeUtilsSync_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../geometry/support/normalizeUtilsSync.js */ "RXWn");
+/* harmony import */ var _geometry_support_typeUtils_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../geometry/support/typeUtils.js */ "dOLD");
+/* harmony import */ var _layers_graphics_featureConversionUtils_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../layers/graphics/featureConversionUtils.js */ "ZlUD");
+/* harmony import */ var _layers_graphics_OptimizedFeature_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../layers/graphics/OptimizedFeature.js */ "k5I3");
+/* harmony import */ var _layers_graphics_data_FeatureStore_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../layers/graphics/data/FeatureStore.js */ "ZRfE");
+/* harmony import */ var _layers_graphics_data_QueryEngine_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../layers/graphics/data/QueryEngine.js */ "ZBG3");
+/* harmony import */ var _snappingUtils_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../snappingUtils.js */ "ZwYu");
+/* harmony import */ var _queryEngineUtils_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./queryEngineUtils.js */ "Wf2p");
+/*
+All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+See https://js.arcgis.com/4.22/esri/copyright.txt for details.
+*/
+let k=class extends(Object(_core_HandleOwner_js__WEBPACK_IMPORTED_MODULE_3__["HandleOwnerMixin"])(_core_Accessor_js__WEBPACK_IMPORTED_MODULE_1__["default"])){constructor(e){super(e),this.availability=1,this.sources={multipoint:null,point:null,polygon:null,polyline:null},this.loadedWkids=new Set,this.loadedWkts=new Set,this.pendingAdds=[]}get updating(){return this.updatingHandles.updating}get layer(){return this.layerSource.layer}destroy(){const e=this.pendingAdds;this.pendingAdds.length=0;for(const t of e)t.task.abort();this.mapSources((e=>this.destroySource(e)))}initialize(){this.handles.add([this.layer.on("graphic-update",(e=>this.onGraphicUpdate(e))),this.updatingHandles.addOnCollectionChange(this.layer.graphics,(e=>this.onGraphicsChanged(e)))]),this.addMany(this.layer.graphics.toArray())}async fetchCandidates(e,t){const r=await Object(_core_promiseUtils_js__WEBPACK_IMPORTED_MODULE_5__["eachAlwaysValues"])(this.mapSources((r=>r.queryEngine.executeQueryForSnapping({point:e.coordinateHelper.vectorToPoint(e.point).toJSON(),distance:e.distance,types:e.types,query:Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(e.filter)?e.filter.createQuery().toJSON():{where:"1=1"}},t).then((({candidates:e})=>e))))),s=r.flat().map((t=>Object(_queryEngineUtils_js__WEBPACK_IMPORTED_MODULE_19__["convertSnappingCandidate"])(t,e.coordinateHelper)));return Object(_snappingUtils_js__WEBPACK_IMPORTED_MODULE_18__["sortCandidatesInPlace"])(e.point,s),s}refresh(){}onGraphicUpdate(e){switch(e.property){case"geometry":case"visible":this.remove(e.graphic),this.addMany([e.graphic])}}onGraphicsChanged(e){for(const t of e.removed)this.remove(t);this.addMany(e.added)}addMany(e){const t=[],r=new Map;for(const s of e)Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isNone"])(s.geometry)||(this.needsInitializeProjection(s.geometry.spatialReference)?(t.push(s.geometry.spatialReference),r.set(s.uid,s)):this.add(s));this.createPendingAdd(t,r)}createPendingAdd(e,t){if(!e.length)return;const s=Object(_core_promiseUtils_js__WEBPACK_IMPORTED_MODULE_5__["createTask"])((async r=>{await Object(_geometry_projection_js__WEBPACK_IMPORTED_MODULE_11__["initializeProjection"])(e.map((e=>({source:e,dest:this.spatialReference}))),{signal:r}),this.markLoadedSpatialReferences(e);for(const[,e]of t)this.add(e)}));this.updatingHandles.addPromise(s.promise);const o={task:s,graphics:t},i=()=>Object(_core_arrayUtils_js__WEBPACK_IMPORTED_MODULE_2__["removeUnordered"])(this.pendingAdds,o);s.promise.then(i,i),this.pendingAdds.push(o)}markLoadedSpatialReferences(e){for(const t of e)null!=t.wkid&&this.loadedWkids.add(t.wkid),null!=t.wkt&&this.loadedWkts.add(t.wkt)}add(e){if(Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isNone"])(e.geometry)||!e.visible)return;let t=e.geometry;if("mesh"===t.type)return;"extent"===t.type&&(t=_geometry_Polygon_js__WEBPACK_IMPORTED_MODULE_10__["default"].fromExtent(t));const r=this.ensureSource(t.type);if(Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isNone"])(r))return;const s=this.createOptimizedFeature(e.uid,t);Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(s)&&r.featureStore.add(s)}needsInitializeProjection(e){return(null==e.wkid||!this.loadedWkids.has(e.wkid))&&((null==e.wkt||!this.loadedWkts.has(e.wkt))&&!Object(_geometry_projection_js__WEBPACK_IMPORTED_MODULE_11__["canProjectWithoutEngine"])(e,this.spatialReference))}createOptimizedFeature(e,t){const r=Object(_geometry_projection_js__WEBPACK_IMPORTED_MODULE_11__["project"])(Object(_geometry_support_normalizeUtilsSync_js__WEBPACK_IMPORTED_MODULE_12__["normalizeCentralMeridianSync"])(t),this.spatialReference);return r?new _layers_graphics_OptimizedFeature_js__WEBPACK_IMPORTED_MODULE_15__["default"](Object(_layers_graphics_featureConversionUtils_js__WEBPACK_IMPORTED_MODULE_14__["convertFromGeometry"])(r,!1,!1),{[O]:e},null,e):null}ensureSource(e){const t=this.sources[e];if(Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(t))return t;const r=this.createSource(e);return this.sources[e]=r,r}createSource(e){const t=_geometry_support_typeUtils_js__WEBPACK_IMPORTED_MODULE_13__["featureGeometryTypeKebabDictionary"].toJSON(e),r=new _layers_graphics_data_FeatureStore_js__WEBPACK_IMPORTED_MODULE_16__["default"]({geometryType:t,hasZ:!1,hasM:!1});return{featureStore:r,queryEngine:new _layers_graphics_data_QueryEngine_js__WEBPACK_IMPORTED_MODULE_17__["default"]({featureStore:r,fields:[{name:O,type:"esriFieldTypeOID",alias:O}],geometryType:t,hasM:!1,hasZ:!1,objectIdField:O,spatialReference:this.spatialReference,scheduler:Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(this.view)&&"3d"===this.view.type?this.view.resourceController.scheduler:null}),type:e}}remove(e){this.mapSources((t=>this.removeFromSource(t,e)));for(const t of this.pendingAdds)t.graphics.delete(e.uid),0===t.graphics.size&&t.task.abort()}removeFromSource(e,t){const r=t.uid;e.featureStore.has(r)&&e.featureStore.removeById(t.uid)}destroySource(e){e.queryEngine.destroy(),this.sources[e.type]=null}mapSources(e){const{point:t,polygon:r,polyline:s,multipoint:i}=this.sources,a=[];return Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(t)&&a.push(e(t)),Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(r)&&a.push(e(r)),Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(s)&&a.push(e(s)),Object(_core_maybe_js__WEBPACK_IMPORTED_MODULE_4__["isSome"])(i)&&a.push(e(i)),a}};Object(_chunks_tslib_es6_js__WEBPACK_IMPORTED_MODULE_0__["_"])([Object(_core_accessorSupport_decorators_property_js__WEBPACK_IMPORTED_MODULE_6__["property"])({constructOnly:!0})],k.prototype,"spatialReference",void 0),Object(_chunks_tslib_es6_js__WEBPACK_IMPORTED_MODULE_0__["_"])([Object(_core_accessorSupport_decorators_property_js__WEBPACK_IMPORTED_MODULE_6__["property"])({constructOnly:!0})],k.prototype,"layerSource",void 0),Object(_chunks_tslib_es6_js__WEBPACK_IMPORTED_MODULE_0__["_"])([Object(_core_accessorSupport_decorators_property_js__WEBPACK_IMPORTED_MODULE_6__["property"])({constructOnly:!0})],k.prototype,"view",void 0),Object(_chunks_tslib_es6_js__WEBPACK_IMPORTED_MODULE_0__["_"])([Object(_core_accessorSupport_decorators_property_js__WEBPACK_IMPORTED_MODULE_6__["property"])({readOnly:!0})],k.prototype,"updating",null),Object(_chunks_tslib_es6_js__WEBPACK_IMPORTED_MODULE_0__["_"])([Object(_core_accessorSupport_decorators_property_js__WEBPACK_IMPORTED_MODULE_6__["property"])({readOnly:!0})],k.prototype,"availability",void 0),k=Object(_chunks_tslib_es6_js__WEBPACK_IMPORTED_MODULE_0__["_"])([Object(_core_accessorSupport_decorators_subclass_js__WEBPACK_IMPORTED_MODULE_9__["subclass"])("esri.views.interactive.snapping.featureSources.GraphicsSnappingSource")],k);const O="OBJECTID";
+
+
+/***/ }),
+
+/***/ "tjz2":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/@arcgis/core/views/interactive/snapping/hints/PointSnappingHint.js ***!
+  \*****************************************************************************************/
+/*! exports provided: PointSnappingHint */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointSnappingHint", function() { return s; });
+/* harmony import */ var _snappingUtils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../snappingUtils.js */ "ZwYu");
+/* harmony import */ var _SnappingHint_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SnappingHint.js */ "fctI");
+/*
+All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+See https://js.arcgis.com/4.22/esri/copyright.txt for details.
+*/
+class s extends _SnappingHint_js__WEBPACK_IMPORTED_MODULE_1__["SnappingHint"]{constructor(t){super(),this.point=t}equals(n){return n instanceof s&&Object(_snappingUtils_js__WEBPACK_IMPORTED_MODULE_0__["objectEqual"])(this.point,n.point)}}
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=featureSources-GraphicsSnappingSource-js.js.map

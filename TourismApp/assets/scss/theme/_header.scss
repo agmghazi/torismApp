@@ -1,0 +1,413 @@
+$header-size: 136px;
+
+/**=====================
+    05. Header CSS Start
+==========================**/
+%common {
+  border-left-color: $dark-color;
+  transition: $sidebar-transition;
+}
+
+%for-animated-hover {
+  box-shadow: $main-header-shadow;
+  transform: translateY(30px);
+}
+
+%for-animated-hover-box {
+  opacity: 1;
+  transform: translateY(0px);
+  visibility: visible;
+
+  &:before {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid $white;
+    content: "";
+    top: -7px;
+    position: absolute;
+    left: 10px !important;
+    z-index: 2;
+  }
+
+  &:after {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid $light-background;
+    content: "";
+    top: -7px;
+    position: absolute;
+    left: 10px !important;
+    z-index: 1;
+  }
+}
+
+/*======= Page Header css Start ======= */
+.page-wrapper {
+  .page-main-header {
+    position: $main-header-position;
+    top: $main-header-top;
+    z-index: $main-header-z-index;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    transition: $sidebar-transition;
+    background-color: $primary-color;
+    box-shadow: $main-header-shadow;
+
+    .toggle-sidebar,
+    .onhover-dropdown {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        background-color: rgba($primary-color, 0.1);
+        border-radius: 100%;
+        left: -11px;
+        z-index: -2;
+        top: -8px;
+        transform: scale(0);
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        &:before {
+          height: 40px;
+          width: 40px;
+          transform: scale(1);
+          transition: all 0.3s ease;
+        }
+
+        > svg {
+          color: $primary-color !important;
+          stroke: $primary-color !important;
+        }
+      }
+    }
+
+    .onhover-dropdown {
+      &:before {
+        top: -2px;
+        left: -2px;
+      }
+    }
+
+    &.open {
+      margin-left: 0;
+      width: 100%;
+      transition: $sidebar-transition;
+    }
+  }
+
+  .page-body-wrapper {
+    .page-body {
+      min-height: calc(100vh - #{$header-size});
+      margin-top: $header-size;
+      padding: $page-body-padding;
+      position: relative;
+      transition: 0.5s;
+    }
+
+    .page-header {
+      padding-top: $page-header-padding;
+      padding-bottom: $page-header-padding;
+
+      .row {
+        align-items: center;
+
+        h3 {
+          font-size: $page-title-font-size;
+          margin-bottom: $page-title-margin-bottom;
+          text-transform: $page-title-text-tranform;
+
+          small {
+            display: $page-small-title-display;
+            font-size: $page-small-title-font-size;
+            margin-bottom: $page-small-title-margin-bottom;
+            text-transform: $page-small-title-text-transform;
+            color: $theme-body-sub-title-color;
+          }
+        }
+      }
+
+      .breadcrumb {
+        background-color: $transparent-color;
+        padding: 0;
+        margin-top: 5px;
+        margin-bottom: 0;
+
+        li {
+          font-size: 13px;
+          letter-spacing: 1px;
+          font-family: $font-roboto, $font-serif;
+        }
+
+        .breadcrumb-item {
+          & + .breadcrumb-item {
+            &:before {
+              content: $breadcrumb-content;
+            }
+          }
+
+          a {
+            color: $primary-color;
+
+            svg {
+              width: 14px;
+              height: 14px;
+              vertical-align: text-top;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*======= Page Header css ends  ======= */
+
+/**======Main Header css Start ======**/
+.page-main-header {
+  max-width: 100vw;
+
+  .main-header-right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: $main-header-right-padding;
+    position: relative;
+
+    .toggle-sidebar {
+      // margin-left: 15px;
+      cursor: pointer;
+      width: auto;
+      padding: 0;
+
+      svg {
+        width: 18px;
+        vertical-align: middle;
+        color: $white !important;
+      }
+    }
+
+    .vertical-mobile-sidebar {
+      display: none;
+    }
+
+    .nav-left {
+      i {
+        margin-right: 20px;
+      }
+
+      input:focus {
+        outline: 0 !important;
+      }
+    }
+
+    .nav-right {
+      text-align: left;
+      padding-left: $main-header-right-nav-right;
+      padding-right: $main-header-right-nav-right;
+
+      ul {
+        li {
+          svg {
+            vertical-align: $main-header-right-nav-icon-align;
+            width: $main-header-right-nav-icon-size;
+
+            path {
+              color: $main-header-right-nav-icon-color;
+            }
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .onhover-show-div {
+        li {
+          display: block;
+        }
+      }
+
+      > ul {
+        padding: 0 0;
+      }
+
+      &.right-menu {
+        ul {
+          justify-content: flex-end;
+
+          li {
+            position: relative;
+
+            .notification {
+              position: absolute;
+              top: -2px;
+              right: -9px;
+              padding: 5px 7px;
+            }
+
+            .profile-media {
+              .media-body {
+                margin-left: 15px;
+
+                .user-icon-before {
+                  font-size: 20px;
+                }
+
+                .user-label,
+                .user-icon-after {
+                  margin-right: 10px;
+                }
+
+                span {
+                  font-weight: 600;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .icon-user {
+        font-size: 16px;
+      }
+
+      > ul {
+        display: flex;
+        align-items: center;
+
+        > li {
+          position: relative;
+          padding: 6px 10px;
+          border-radius: 4px;
+          margin-right: 20px;
+
+          .badge {
+            padding: 4px 8px;
+          }
+
+          span {
+            letter-spacing: 0.9px;
+
+            .fa {
+              color: $gray-60;
+            }
+
+            ul {
+              left: inherit;
+              right: -10px;
+              width: 130px;
+
+              &:before,
+              &:after {
+                left: inherit;
+                right: 10px;
+              }
+
+              li {
+                display: block;
+
+                a {
+                  font-size: 14px;
+                  color: $dark-color;
+
+                  i {
+                    margin-left: 10px;
+                    font-size: 13px;
+                    color: $dark-color;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .flag-icon {
+          font-size: 16px;
+        }
+      }
+
+      .profile-dropdown {
+        width: 160px;
+        top: 49px;
+        left: 0;
+        padding: 10px;
+
+        li {
+          a {
+            padding: 10px;
+            display: flex;
+            border-bottom: $card-border-color;
+            color: #051418;
+            align-items: center;
+
+            &:hover {
+              color: $primary-color;
+
+              svg {
+                color: $primary-color;
+
+                path {
+                  color: $primary-color;
+                }
+              }
+            }
+
+            svg {
+              width: 16px;
+              vertical-align: bottom;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    li {
+      display: inline-block;
+      position: relative;
+    }
+  }
+}
+
+.onhover-dropdown {
+  cursor: pointer;
+  position: relative;
+
+  .onhover-show-div {
+    @extend %for-animated-hover-box;
+  }
+}
+
+.onhover-show-div {
+  top: 80px;
+  position: absolute;
+  z-index: 8;
+  background-color: $white;
+  transition: all linear 0.3s;
+  @extend %for-animated-hover;
+
+  li {
+    a {
+      svg {
+        margin-top: 0 !important;
+
+        path,
+        line {
+          color: $theme-body-font-color !important;
+        }
+      }
+    }
+  }
+}
