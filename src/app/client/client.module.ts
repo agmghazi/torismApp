@@ -9,6 +9,7 @@ import {SharedModule} from "../shared/shared.module";
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
 import { CreateNewFeatureComponent } from './components/mapComponent/create-new-feature/create-new-feature.component';
 import { ShareLocationComponent } from './components/mapComponent/share-location/share-location.component';
+import { ExistMapComponent } from './components/mapComponent/exist-map/exist-map.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ShareLocationComponent } from './components/mapComponent/share-location
     ContactMeComponent,
     CreateNewFeatureComponent,
     ShareLocationComponent,
+    ExistMapComponent,
   ],
   imports: [
     CommonModule,

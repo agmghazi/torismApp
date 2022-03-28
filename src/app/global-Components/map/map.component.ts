@@ -12,6 +12,7 @@ import {ShareDataService} from '../../services/share-data.service';
 import * as watchUtils from '@arcgis/core/core/watchUtils';
 import Query from '@arcgis/core/rest/support/Query';
 import WebMap from '@arcgis/core/WebMap';
+import ScaleBar from "@arcgis/core/widgets/ScaleBar";
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +80,12 @@ export class MapComponent implements OnInit {
       nextBasemap: 'satellite',
     });
 
+    const scaleBar = new ScaleBar({
+      view: this.featuresService.view,
+      unit: "metric",
+      style: "ruler",
+    });
+
     this.featuresService.view.ui.remove([
       {
         component: 'zoom',
@@ -106,6 +113,11 @@ export class MapComponent implements OnInit {
       {
         component: trackWidget,
         position: 'top-left',
+        index: 1,
+      },
+      {
+        component: scaleBar,
+        position: 'bottom-right',
         index: 1,
       },
     ]);

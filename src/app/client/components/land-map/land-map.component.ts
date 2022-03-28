@@ -35,6 +35,9 @@ import SpatialReference from '@arcgis/core/geometry/SpatialReference';
 import ProjectParameters from '@arcgis/core/rest/support/ProjectParameters';
 import Point from '@arcgis/core/geometry/Point';
 import GeometryService from '@arcgis/core/tasks/GeometryService';
+import Sketch from "@arcgis/core/widgets/Sketch";
+import * as geometryEngineAsync from '@arcgis/core/geometry/geometryEngineAsync';
+import Search from "@arcgis/core/widgets/Search";
 
 @Component({
   selector: 'app-land-map',
@@ -46,7 +49,10 @@ export class LandMapComponent implements OnInit {
   mapStyle = '';
   featureGraphic: any;
   isContactMeOpen = false;
+  lineMeasurements;
+  getInforamtions:boolean=false
   @ViewChild('mapDiv', {static: false}) mapDiv: ElementRef;
+  @ViewChild('measurements', {static: false}) measurements: ElementRef;
 
   constructor(private zone: NgZone, private featuresService: FeaturesMapService, private mapComponent: MapComponent,
               private modalService: NgbModal, private ngxLoader: NgxUiLoaderService, private activeModal: NgbActiveModal,
@@ -74,8 +80,30 @@ export class LandMapComponent implements OnInit {
     this.featuresService.map.add(this.featuresService.graphicsLayer);
     this.openStaticPages();
     this.getAttributeData();
+    this.searchBar();
+    this.createPathsWithLength();
   }
 
+  searchBar(){
+    const searchWidget = new Search({
+      view: this.featuresService.view,
+      allPlaceholder: "البحث",
+      includeDefaultSources: false,
+      sources: [
+        {
+          // @ts-ignore
+          layer: this.featuresService.PointsTourism,
+          searchFields: ["Name"],
+          displayField: "Name",
+          exactMatch: false,
+          outFields: ["Name", "Station"],
+          name: "المعالم السياحيه",
+          placeholder: "ادخل اسم المعلم"
+        },
+      ]
+    });
+    this.featuresService.view.ui.add(searchWidget, 'top-right');
+  }
   runAnimation() {
     this.featuresService.view.on('click', (event) => {
       this.featuresService.view.hitTest(event).then((response) => {
@@ -106,6 +134,69 @@ export class LandMapComponent implements OnInit {
     });
   }
 
+  createPathsWithLength(){
+    const sketch = new Sketch({
+      layer: this.featuresService.graphicsLayer,
+      view: this.featuresService.view,
+      availableCreateTools: ["polyline"],
+      creationMode: "update",
+      // @ts-ignore
+      updateOnGraphicClick: true,
+      visibleElements: {
+        createTools: {
+          point: false,
+          circle: false
+        },
+        selectionTools: {
+          "lasso-selection": false,
+          "rectangle-selection": false,
+        },
+        settingsMenu: false,
+        undoRedoMenu: false
+      }
+    });
+    this.featuresService.view.ui.add(sketch, 'top-right');
+
+    var root=this;
+    function getLength(line) {
+       geometryEngineAsync.planarLength(line, "kilometers").then((result)=>{
+        root.lineMeasurements =Number(result).toFixed(2) + "كيلو متر"
+      });
+    }
+
+    function switchType(geom) {
+      switch (geom.type) {
+        case "polyline":
+          getLength(geom);
+          break;
+        default:
+          console.log("No value found");
+      }
+    }
+
+    sketch.on("update", (e) => {
+      const geometry = e.graphics[0].geometry;
+
+      if (e.state === "start") {
+        switchType(geometry);
+      }
+
+      if (e.state === "complete") {
+        this.featuresService.graphicsLayer.remove(this.featuresService.graphicsLayer.graphics.getItemAt(0));
+        root.lineMeasurements = "";
+      }
+
+      if (
+        e.toolEventInfo &&
+        (e.toolEventInfo.type === "scale-stop" ||
+          e.toolEventInfo.type === "reshape-stop" ||
+          e.toolEventInfo.type === "move-stop")
+      ) {
+        switchType(geometry);
+      }
+
+    });
+  }
   createGraphic(path: any) {
     this.featuresService.graphicsLayer.removeAll();
     let polyline: any = {
@@ -244,4 +335,5 @@ export class LandMapComponent implements OnInit {
       this.isContactMeOpen = !!result;
     });
   }
+
 }

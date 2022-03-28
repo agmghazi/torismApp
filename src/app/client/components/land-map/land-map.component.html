@@ -1,10 +1,21 @@
 <div #mapDiv>
   <app-map [mapStyle]=this.mapStyle></app-map>
+  <div class="measurements" *ngIf="this.lineMeasurements">
+    {{this.lineMeasurements}}
+  </div>
+  <img src="./assets/pngIcons/icons8-car-50.png" class="carAnimation" (click)="this.runAnimation()">
+  <img src="./assets/pngIcons/icons8-information-50.png" class="iconInformatios" (click)="this.getInforamtions =!this.getInforamtions ">
 
-  <img src="./assets/pngIcons/icons8-location-50.png" class="basemapImage" (click)="runAnimation()">
+
+  <div class="textInformatios" *ngIf="this.getInforamtions">
+    <div class="module">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero pariatur corporis quaerat voluptatum eos tempora temporibus nisi voluptates sed, exercitationem sequi dolore culpa incidunt accusamus, quasi unde reprehenderit ea molestias.
+  </div>
+  </div>
+
+
   <div *ngIf="isContactMeOpen">
     <app-contact-me></app-contact-me>
   </div>
-
 </div>
-
+<app-exist-map></app-exist-map>

@@ -2,7 +2,7 @@
   <div class="justify-content-start">
 
     <h4 class="modal-title">
-      الاسم  {{this.drawFeatureGraphic.attributes.Name}} </h4>
+      الاسم: {{this.drawFeatureGraphic.attributes.Name}} </h4>
   </div>
   <div class="justify-content-end">
     <img src="/assets/pngIcons/cancel.png" (click)="activeModal.dismiss('Cross click')" class="pngIcons cursorPointer">
@@ -14,13 +14,19 @@
       <td>المحطه</td>
       <td>{{this.drawFeatureGraphic.attributes.Station}}</td>
     </tr>
-    <tr>
+    <tr *ngIf="this.drawFeatureGraphic.attributes.FolderPath  !== null && this.drawFeatureGraphic.attributes.FolderPath !== ' '&& this.drawFeatureGraphic.attributes.FolderPath !== ''">
       <td>صور</td>
-      <td>ووووو</td>
+      <td  >
+        <img src="{{this.drawFeatureGraphic.attributes.FolderPath}}" class="imagePath">
+      </td>
     </tr>
-    <tr>
+    <tr *ngIf="this.drawFeatureGraphic.attributes.VideoPath  !== null && this.drawFeatureGraphic.attributes.VideoPath !== ' '&& this.drawFeatureGraphic.attributes.VideoPath !== ''">
       <td>الفيديو</td>
-      <td>ووووو</td>
+      <td>
+        <div>
+          <iframe width="260" height="230" [src]="this.link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </td>
     </tr>
 
   </table>
@@ -29,3 +35,6 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click')">اغلاق</button>
 </div>
+
+
+

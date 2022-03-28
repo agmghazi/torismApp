@@ -83,9 +83,22 @@ export class FeaturesMapService {
   }
 
   FeaturePolygonTourism(mapInstance: Map, trans: number) {
+    let citiesRenderer:any = {
+      type: "simple",  // autocasts as new SimpleRenderer()
+      symbol: {
+        type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+        color: [ 255, 128, 0, 0.1 ],
+        outline: {  // autocasts as new SimpleLineSymbol()
+          width: 1,
+          color:  [ 255, 128, 0 ],
+        }
+      }
+    };
+
     this.PolygonTourism = new FeatureLayer({
       url: this.arcgisUrl + '/2',
       opacity: trans,
+      renderer: citiesRenderer,
     });
     mapInstance.add(this.PolygonTourism);
   }
