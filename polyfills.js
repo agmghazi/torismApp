@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/ahmedmac/Desktop/torismApp/new/tourismApp/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! E:\sotwares\tourismApp\torismApp\src\polyfills.ts */"hN/g");
 
 
 /***/ }),
