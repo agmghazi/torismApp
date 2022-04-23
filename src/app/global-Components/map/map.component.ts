@@ -13,6 +13,7 @@ import * as watchUtils from '@arcgis/core/core/watchUtils';
 import Query from '@arcgis/core/rest/support/Query';
 import WebMap from '@arcgis/core/WebMap';
 import ScaleBar from "@arcgis/core/widgets/ScaleBar";
+import LayerList from '@arcgis/core/widgets/LayerList';
 
 @Injectable({
   providedIn: 'root'
@@ -61,10 +62,18 @@ export class MapComponent implements OnInit {
 
     });
 
+    this.featuresService.FeatureBusPointsTourism(this.featuresService.map, 1);
+    this.featuresService.Feature_sheraLinesTourism(this.featuresService.map, 1);
+    this.featuresService.Feature_RiyadhLinesTourism(this.featuresService.map, 1);
+    this.featuresService.FeatureKharjLinesTourism(this.featuresService.map, 1);
+    this.featuresService.FeatureAl_MajmaLinesTourism(this.featuresService.map, 1);
+    this.featuresService.FeatureSadirLinesTourism(this.featuresService.map, 1);
+    // this.featuresService.FeaturePolygonTourism(this.featuresService.map, 1);
     this.featuresService.FeaturePointsTourism(this.featuresService.map, 1);
-    this.featuresService.FeatureLinesTourism(this.featuresService.map, 1);
-    this.featuresService.FeaturePolygonTourism(this.featuresService.map, 1);
 
+    let layerList = new LayerList({
+      view: this.featuresService.view
+    });
     const trackWidget = new Track({
       view: this.featuresService.view
     });
@@ -102,6 +111,11 @@ export class MapComponent implements OnInit {
       },
       {
         component: compass,
+        position: 'top-left',
+        index: 0,
+      },
+      {
+        component: layerList,
         position: 'top-left',
         index: 0,
       },

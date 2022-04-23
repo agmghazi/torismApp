@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import esriConfig from '@arcgis/core/config.js';
-import {IdentitySecurityService} from './services/identity-security.service';
+import { IdentitySecurityService } from './services/identity-security.service';
 import jwt_decode from 'jwt-decode';
-import {Constants} from './Helper/constants';
-import {User} from './models/identityModels/user';
+import { Constants } from './Helper/constants';
+import { User } from './models/identityModels/user';
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router';
-import {ResponseModel} from './models/identityModels/responseModel';
+import { Router } from '@angular/router';
+import { ResponseModel } from './models/identityModels/responseModel';
 import esriId from '@arcgis/core/identity/IdentityManager';
-import {environment} from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import ServerInfo from '@arcgis/core/identity/ServerInfo';
-import {EncryptionService} from "./services/encryption.service";
-import {ShareDataService} from "./services/share-data.service";
+import { EncryptionService } from './services/encryption.service';
+import { ShareDataService } from './services/share-data.service';
 
 @Component({
   selector: 'app-root',
@@ -21,20 +21,21 @@ import {ShareDataService} from "./services/share-data.service";
 export class AppComponent implements OnInit {
   constructor(
     private identitySecurity: IdentitySecurityService,
-    private router: Router, private encryptionService: EncryptionService, private shareDataService: ShareDataService
-  ) {
-  }
+    private router: Router,
+    private encryptionService: EncryptionService,
+    private shareDataService: ShareDataService
+  ) {}
 
   isExpired: boolean = false;
   title = 'NBN App';
   checker;
 
   ngOnInit(): void {
-    esriConfig.assetsPath = 'https://github.com/agmghazi/torismApp/blob/gh-pages/assets';
+    // esriConfig.assetsPath = 'https://github.com/agmghazi/torismApp/blob/gh-pages/assets';
     //production mode
-    // esriConfig.assetsPath = '../../../assets';
-    esriConfig.workers.workerPath =
-      'https://github.com/agmghazi/torismApp/blob/gh-pages/assets/esri/core/workers/RemoteClient.js';
+    esriConfig.assetsPath = '/assets';
+    // esriConfig.workers.workerPath =
+    //   'https://github.com/agmghazi/torismApp/blob/gh-pages/assets/esri/core/workers/RemoteClient.js';
     this.intervalToken();
   }
 
@@ -42,7 +43,6 @@ export class AppComponent implements OnInit {
     this.isExpired = true;
     this.token();
   }
-
 
   intervalToken() {
     var root = this;
@@ -132,7 +132,9 @@ export class AppComponent implements OnInit {
             );
             let user = data.dateSet as User;
             if (user.roles.indexOf('Admin') > -1) {
-              this.router.navigate(['/home/global-Components/identity/all-users']);
+              this.router.navigate([
+                '/home/global-Components/identity/all-users',
+              ]);
             } else {
               this.router.navigate(['/home']);
             }

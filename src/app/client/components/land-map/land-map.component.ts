@@ -113,7 +113,8 @@ export class LandMapComponent implements OnInit {
       this.featuresService.view.hitTest(event).then((response) => {
         if (response.results.length) {
           let graphic = response.results.filter((result) => {
-            return result.graphic.layer === this.featuresService.LinesTourism;
+            if (result.graphic.layer.layerId === 3)
+              return result.graphic
           });
           console.log(graphic);
           if (graphic.length > 0) {
@@ -317,9 +318,10 @@ export class LandMapComponent implements OnInit {
       this.featuresService.view.hitTest(event).then((response) => {
         if (response.results.length) {
           let graphicPointsTourism = response.results.filter((result) => {
-            return result.graphic.layer === this.featuresService.PointsTourism;
+            if (result.graphic.layer.layerId === 0)
+              return result.graphic
           });
-          // console.log(graphicPointsTourism);
+          console.log(graphicPointsTourism);
           if (graphicPointsTourism.length > 0) {
             this.featureGraphic = graphicPointsTourism[0].graphic;
             if (!this.modalService.hasOpenModals()) {

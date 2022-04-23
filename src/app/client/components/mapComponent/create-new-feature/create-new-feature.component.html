@@ -14,10 +14,14 @@
       <td>المحطه</td>
       <td>{{this.drawFeatureGraphic.attributes.Station}}</td>
     </tr>
-    <tr *ngIf="this.drawFeatureGraphic.attributes.FolderPath  !== null && this.drawFeatureGraphic.attributes.FolderPath !== ' '&& this.drawFeatureGraphic.attributes.FolderPath !== ''">
+    <tr>
+      <td>تعريف</td>
+      <td>{{this.drawFeatureGraphic.attributes.FolderPath}}</td>
+    </tr>
+    <tr *ngIf="this.drawFeatureGraphic.attributes.photopath  !== null && this.drawFeatureGraphic.attributes.photopath !== ' '&& this.drawFeatureGraphic.attributes.photopath !== ''">
       <td>صور</td>
       <td  >
-        <img src="{{this.drawFeatureGraphic.attributes.FolderPath}}" class="imagePath">
+        <img src="{{this.drawFeatureGraphic.attributes.photopath}}" class="imagePath">
       </td>
     </tr>
     <tr *ngIf="this.drawFeatureGraphic.attributes.VideoPath  !== null && this.drawFeatureGraphic.attributes.VideoPath !== ' '&& this.drawFeatureGraphic.attributes.VideoPath !== ''">
