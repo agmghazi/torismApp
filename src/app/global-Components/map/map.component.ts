@@ -126,7 +126,7 @@ export class MapComponent implements OnInit {
       },
       {
         component: trackWidget,
-        position: 'top-left',
+        position: 'top-right',
         index: 1,
       },
       {

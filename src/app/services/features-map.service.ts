@@ -120,6 +120,24 @@ export class FeaturesMapService {
           },
         },
         {
+          value: 'قرية تراثيه',
+          symbol: {
+            type: 'picture-marker',
+            url: 'https://static.arcgis.com/images/Symbols/Government/Homeless-Food-Assistance.png',
+            width: '15px',
+            height: '15px',
+          },
+        },
+        {
+          value: 'منطقة تاريخية',
+          symbol: {
+            type: 'picture-marker',
+            url: 'https://static.arcgis.com/images/Symbols/Government/Homeless-Food-Assistance.png',
+            width: '15px',
+            height: '15px',
+          },
+        },
+        {
           value: 'قرية تراثية',
           symbol: {
             type: 'picture-marker',
