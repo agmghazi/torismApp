@@ -1,24 +1,23 @@
-import {Component, Injectable, Input, NgZone, OnInit} from '@angular/core';
+import { Component, Injectable, Input, NgZone, OnInit } from '@angular/core';
 import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
-import {FeaturesMapService} from '../../services/features-map.service';
-import {Subject} from 'rxjs';
+import { FeaturesMapService } from '../../services/features-map.service';
+import { Subject } from 'rxjs';
 import Compass from '@arcgis/core/widgets/Compass';
 import Home from '@arcgis/core/widgets/Home';
 import BasemapToggle from '@arcgis/core/widgets/BasemapToggle';
 import Track from '@arcgis/core/widgets/Track';
-import {ShareDataService} from '../../services/share-data.service';
+import { ShareDataService } from '../../services/share-data.service';
 import * as watchUtils from '@arcgis/core/core/watchUtils';
 import Query from '@arcgis/core/rest/support/Query';
 import WebMap from '@arcgis/core/WebMap';
-import ScaleBar from "@arcgis/core/widgets/ScaleBar";
+import ScaleBar from '@arcgis/core/widgets/ScaleBar';
 import LayerList from '@arcgis/core/widgets/LayerList';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -29,16 +28,17 @@ export class MapComponent implements OnInit {
   isActive = false;
   cityName = '';
 
-  constructor(private zone: NgZone, private featuresService: FeaturesMapService, private shareDataService: ShareDataService) {
-  }
+  constructor(
+    private zone: NgZone,
+    private featuresService: FeaturesMapService,
+    private shareDataService: ShareDataService
+  ) {}
 
   initializeMap(): Promise<any> {
-
     this.featuresService.map = new Map({
       basemap: 'topo-vector',
-      layers: []
+      layers: [],
     });
-
 
     this.featuresService.view = new MapView({
       container: 'viewDiv',
@@ -56,26 +56,30 @@ export class MapComponent implements OnInit {
       this.featuresService.map.basemap.baseLayers.getItemAt(0).opacity = 0;
     });
 
-    this.featuresService.graphicsLayer = new GraphicsLayer();
-    (window as any)._graphic = this.featuresService.graphicsLayer;
-    this.shareDataService.isLoadService.subscribe((result) => {
-
-    });
+    // this.featuresService.graphicsLayer = new GraphicsLayer();
+    //  (window as any)._graphic = this.featuresService.graphicsLayer;
+    this.shareDataService.isLoadService.subscribe((result) => {});
 
     this.featuresService.FeatureBusPointsTourism(this.featuresService.map, 1);
     this.featuresService.Feature_sheraLinesTourism(this.featuresService.map, 1);
-    this.featuresService.Feature_RiyadhLinesTourism(this.featuresService.map, 1);
+    this.featuresService.Feature_RiyadhLinesTourism(
+      this.featuresService.map,
+      1
+    );
     this.featuresService.FeatureKharjLinesTourism(this.featuresService.map, 1);
-    this.featuresService.FeatureAl_MajmaLinesTourism(this.featuresService.map, 1);
+    this.featuresService.FeatureAl_MajmaLinesTourism(
+      this.featuresService.map,
+      1
+    );
     this.featuresService.FeatureSadirLinesTourism(this.featuresService.map, 1);
     // this.featuresService.FeaturePolygonTourism(this.featuresService.map, 1);
     this.featuresService.FeaturePointsTourism(this.featuresService.map, 1);
 
     let layerList = new LayerList({
-      view: this.featuresService.view
+      view: this.featuresService.view,
     });
     const trackWidget = new Track({
-      view: this.featuresService.view
+      view: this.featuresService.view,
     });
     const homeWidget = new Home({
       view: this.featuresService.view,
@@ -91,8 +95,8 @@ export class MapComponent implements OnInit {
 
     const scaleBar = new ScaleBar({
       view: this.featuresService.view,
-      unit: "metric",
-      style: "ruler",
+      unit: 'metric',
+      style: 'ruler',
     });
 
     this.featuresService.view.ui.remove([
@@ -138,13 +142,11 @@ export class MapComponent implements OnInit {
     return this.featuresService.view.when();
   }
 
-
   ngOnInit(): void {
     this.zone.runOutsideAngular(() => {
       this.initializeMap()
         .then(() => {
-          this.zone.run(() => {
-          });
+          this.zone.run(() => {});
         })
         .catch((error) => {
           console.log(error);

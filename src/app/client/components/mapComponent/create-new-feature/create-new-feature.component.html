@@ -15,20 +15,28 @@
       <td>{{this.drawFeatureGraphic.attributes.Station}}</td>
     </tr>
     <tr>
+      <td>وقت الزياره</td>
+      <td>{{this.drawFeatureGraphic.attributes.timepath}}</td>
+    </tr>
+    <tr>
       <td>تعريف</td>
       <td>{{this.drawFeatureGraphic.attributes.FolderPath}}</td>
     </tr>
-    <tr *ngIf="this.drawFeatureGraphic.attributes.photopath  !== null && this.drawFeatureGraphic.attributes.photopath !== ' '&& this.drawFeatureGraphic.attributes.photopath !== ''">
+    <tr
+      *ngIf="this.drawFeatureGraphic.attributes.photopath  !== null && this.drawFeatureGraphic.attributes.photopath !== ' '&& this.drawFeatureGraphic.attributes.photopath !== ''">
       <td>صور</td>
-      <td  >
+      <td>
         <img src="{{this.drawFeatureGraphic.attributes.photopath}}" class="imagePath">
       </td>
     </tr>
-    <tr *ngIf="this.drawFeatureGraphic.attributes.VideoPath  !== null && this.drawFeatureGraphic.attributes.VideoPath !== ' '&& this.drawFeatureGraphic.attributes.VideoPath !== ''">
+    <tr
+      *ngIf="this.drawFeatureGraphic.attributes.VideoPath  !== null && this.drawFeatureGraphic.attributes.VideoPath !== ' '&& this.drawFeatureGraphic.attributes.VideoPath !== ''">
       <td>الفيديو</td>
       <td>
         <div>
-          <iframe width="260" height="230" [src]="this.link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="260" height="230" [src]="this.link" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
         </div>
       </td>
     </tr>
@@ -39,6 +47,3 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click')">اغلاق</button>
 </div>
-
-
-

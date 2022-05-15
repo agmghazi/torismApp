@@ -5,29 +5,35 @@ import {
   ElementRef,
   HostListener,
   NgZone,
-  OnInit, TemplateRef,
+  OnInit,
+  TemplateRef,
   ViewChild,
-  ViewContainerRef, ViewRef
+  ViewContainerRef,
+  ViewRef,
 } from '@angular/core';
-import {NgbActiveModal, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {FeaturesMapService} from '../../../services/features-map.service';
-import {NgxUiLoaderService} from 'ngx-ui-loader';
-import {MapComponent} from '../../../global-Components/map/map.component';
+import {
+  NgbActiveModal,
+  NgbModal,
+  NgbModalConfig,
+} from '@ng-bootstrap/ng-bootstrap';
+import { FeaturesMapService } from '../../../services/features-map.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { MapComponent } from '../../../global-Components/map/map.component';
 import Swal from 'sweetalert2';
 import SketchViewModel from '@arcgis/core/widgets/Sketch/SketchViewModel';
 import Request from '@arcgis/core/request';
 import Polygon from '@arcgis/core/geometry/Polygon';
-import {HeaderDataService} from '../../../services/header-data.service';
-import {EsriComponentsService} from '../../../services/esri-components.service';
-import {IdentitySecurityService} from '../../../services/identity-security.service';
-import {CreateNewFeatureComponent} from '../mapComponent/create-new-feature/create-new-feature.component';
-import {ActivatedRoute, Params} from '@angular/router';
-import {ShareLocationComponent} from '../mapComponent/share-location/share-location.component';
-import {DatePipe} from '@angular/common';
+import { HeaderDataService } from '../../../services/header-data.service';
+import { EsriComponentsService } from '../../../services/esri-components.service';
+import { IdentitySecurityService } from '../../../services/identity-security.service';
+import { CreateNewFeatureComponent } from '../mapComponent/create-new-feature/create-new-feature.component';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ShareLocationComponent } from '../mapComponent/share-location/share-location.component';
+import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
-import {ShareDataService} from '../../../services/share-data.service';
-import {Title} from '@angular/platform-browser';
-import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
+import { ShareDataService } from '../../../services/share-data.service';
+import { Title } from '@angular/platform-browser';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import Locate from '@arcgis/core/widgets/Locate';
 import Graphic from '@arcgis/core/Graphic';
 import WebMap from '@arcgis/core/WebMap';
@@ -43,25 +49,33 @@ import Search from '@arcgis/core/widgets/Search';
   selector: 'app-land-map',
   templateUrl: './land-map.component.html',
   styleUrls: ['./land-map.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+  providers: [NgbModalConfig, NgbModal],
 })
 export class LandMapComponent implements OnInit {
   type: 'facebook' | 'twitter';
-  shareUrl: string="http://localhost:4200/client/home/landMap";
+  shareUrl: string = 'http://localhost:4200/client/home/landMap';
   navUrl: string;
   mapStyle = '';
   featureGraphic: any;
   isContactMeOpen = false;
   lineMeasurements;
   getInforamtions: boolean = false;
-  @ViewChild('mapDiv', {static: false}) mapDiv: ElementRef;
-  @ViewChild('measurements', {static: false}) measurements: ElementRef;
+  @ViewChild('mapDiv', { static: false }) mapDiv: ElementRef;
+  @ViewChild('measurements', { static: false }) measurements: ElementRef;
 
-  constructor(private zone: NgZone, private featuresService: FeaturesMapService, private mapComponent: MapComponent,
-              private modalService: NgbModal, private ngxLoader: NgxUiLoaderService, private activeModal: NgbActiveModal,
-              private headerDataService: HeaderDataService, private esriComponentsService: EsriComponentsService, private titleService: Title,
-              private shareDataService: ShareDataService,
-              public breakpointObserver: BreakpointObserver) {
+  constructor(
+    private zone: NgZone,
+    private featuresService: FeaturesMapService,
+    private mapComponent: MapComponent,
+    private modalService: NgbModal,
+    private ngxLoader: NgxUiLoaderService,
+    private activeModal: NgbActiveModal,
+    private headerDataService: HeaderDataService,
+    private esriComponentsService: EsriComponentsService,
+    private titleService: Title,
+    private shareDataService: ShareDataService,
+    public breakpointObserver: BreakpointObserver
+  ) {
     this.titleService.setTitle('الصفحه الرئيسيه');
   }
 
@@ -76,7 +90,6 @@ export class LandMapComponent implements OnInit {
           this.mapStyle = 'height: 99.6vh;width: 100vw';
         }
       });
-
   }
 
   ngAfterViewInit(): void {
@@ -84,7 +97,7 @@ export class LandMapComponent implements OnInit {
     this.openStaticPages();
     this.getAttributeData();
     this.searchBar();
-    this.createPathsWithLength();
+    // this.createPathsWithLength();
   }
 
   searchBar() {
@@ -101,9 +114,9 @@ export class LandMapComponent implements OnInit {
           exactMatch: false,
           outFields: ['Name', 'Station'],
           name: 'المعالم السياحيه',
-          placeholder: 'ادخل اسم المعلم'
+          placeholder: 'ادخل اسم المعلم',
         },
-      ]
+      ],
     });
     this.featuresService.view.ui.add(searchWidget, 'top-right');
   }
@@ -113,8 +126,7 @@ export class LandMapComponent implements OnInit {
       this.featuresService.view.hitTest(event).then((response) => {
         if (response.results.length) {
           let graphic = response.results.filter((result) => {
-            if (result.graphic.layer.layerId === 3)
-              return result.graphic
+            if (result.graphic.layer.layerId === 3) return result.graphic;
           });
           console.log(graphic);
           if (graphic.length > 0) {
@@ -150,15 +162,15 @@ export class LandMapComponent implements OnInit {
       visibleElements: {
         createTools: {
           point: false,
-          circle: false
+          circle: false,
         },
         selectionTools: {
           'lasso-selection': false,
           'rectangle-selection': false,
         },
         settingsMenu: false,
-        undoRedoMenu: false
-      }
+        undoRedoMenu: false,
+      },
     });
     this.featuresService.view.ui.add(sketch, 'top-right');
 
@@ -188,7 +200,9 @@ export class LandMapComponent implements OnInit {
       }
 
       if (e.state === 'complete') {
-        this.featuresService.graphicsLayer.remove(this.featuresService.graphicsLayer.graphics.getItemAt(0));
+        this.featuresService.graphicsLayer.remove(
+          this.featuresService.graphicsLayer.graphics.getItemAt(0)
+        );
         root.lineMeasurements = '';
       }
 
@@ -200,7 +214,6 @@ export class LandMapComponent implements OnInit {
       ) {
         switchType(geometry);
       }
-
     });
   }
 
@@ -209,18 +222,18 @@ export class LandMapComponent implements OnInit {
     let polyline: any = {
       type: 'polyline',
       paths: path,
-      spatialReference: 102100
+      spatialReference: 102100,
     };
 
     let lineSymbol: any = {
       type: 'simple-line', // autocasts as SimpleLineSymbol()
       color: [226, 119, 40],
-      width: 7
+      width: 7,
     };
 
     let polylineGraphic = new Graphic({
       geometry: polyline,
-      symbol: lineSymbol
+      symbol: lineSymbol,
     });
     // console.log('Add polyline', polylineGraphic);
     // this.featuresService.view.graphics.add(polylineGraphic);
@@ -257,7 +270,7 @@ export class LandMapComponent implements OnInit {
 
     let splineIndex = 0;
     durations.forEach((duration, index) => {
-      durations[index] = duration * AREA_ANIMATION_DURATION / totalLength;
+      durations[index] = (duration * AREA_ANIMATION_DURATION) / totalLength;
       splineDurations[splineIndex] += durations[index];
     });
 
@@ -266,7 +279,7 @@ export class LandMapComponent implements OnInit {
     const movingPoint = {
       spatialReference: SpatialReference.WebMercator,
       x: start[0],
-      y: start[1]
+      y: start[1],
     };
     var root = this;
 
@@ -318,20 +331,23 @@ export class LandMapComponent implements OnInit {
       this.featuresService.view.hitTest(event).then((response) => {
         if (response.results.length) {
           let graphicPointsTourism = response.results.filter((result) => {
-            if (result.graphic.layer.layerId === 0)
-              return result.graphic
+            if (result.graphic.layer.layerId === 0) return result.graphic;
           });
           console.log(graphicPointsTourism);
           if (graphicPointsTourism.length > 0) {
             this.featureGraphic = graphicPointsTourism[0].graphic;
             if (!this.modalService.hasOpenModals()) {
-              const modalRef = this.modalService.open(CreateNewFeatureComponent, {
-                windowClass: 'modal-popUP',
-                backdrop: false,
-                scrollable: true
-              });
+              const modalRef = this.modalService.open(
+                CreateNewFeatureComponent,
+                {
+                  windowClass: 'modal-popUP',
+                  backdrop: false,
+                  scrollable: true,
+                }
+              );
               console.log('this.featureGraphic', this.featureGraphic);
-              modalRef.componentInstance.drawFeatureGraphic = this.featureGraphic;
+              modalRef.componentInstance.drawFeatureGraphic =
+                this.featureGraphic;
             }
           }
         }
@@ -345,14 +361,14 @@ export class LandMapComponent implements OnInit {
     });
   }
 
-
-   createNavigationUrl(type) {
+  createNavigationUrl(type) {
     let searchParams = new URLSearchParams();
     switch (type) {
       case 'facebook':
         searchParams.set('u', this.shareUrl);
-        this.navUrl = 'https://www.facebook.com/sharer/sharer.php?' + searchParams;
-         window.open(this.navUrl, '_blank');
+        this.navUrl =
+          'https://www.facebook.com/sharer/sharer.php?' + searchParams;
+        window.open(this.navUrl, '_blank');
         break;
       case 'twitter':
         searchParams.set('url', this.shareUrl);
@@ -361,5 +377,4 @@ export class LandMapComponent implements OnInit {
         break;
     }
   }
-
 }
