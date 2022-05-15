@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import Map from '@arcgis/core/Map';
 import MapView from '@arcgis/core/views/MapView';
@@ -13,10 +13,10 @@ import {
   POSITION,
   SPINNER,
 } from 'ngx-ui-loader';
-import {BehaviorSubject, Subject} from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import Query from '@arcgis/core/rest/support/Query';
 import Geometry from '@arcgis/core/geometry/Geometry';
-import {ShareDataService} from './share-data.service';
+import { ShareDataService } from './share-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,8 +35,7 @@ export class FeaturesMapService {
   constructor(
     private ngxLoader: NgxUiLoaderService,
     private shareDataService: ShareDataService
-  ) {
-  }
+  ) {}
 
   view: any;
   map: any;
@@ -99,7 +98,7 @@ export class FeaturesMapService {
     let renderer: any = {
       type: 'unique-value',
       field: 'codpath',
-      defaultSymbol: {type: 'simple'},
+      defaultSymbol: { type: 'simple' },
       uniqueValueInfos: [
         {
           value: 'متحف',
@@ -175,6 +174,15 @@ export class FeaturesMapService {
         },
         {
           value: 'مركز ثقافي',
+          symbol: {
+            type: 'picture-marker',
+            url: 'https://static.arcgis.com/images/Symbols/Government/Damaged-Public-Facilities-Category-C.png',
+            width: '15px',
+            height: '15px',
+          },
+        },
+        {
+          value: 'مركز',
           symbol: {
             type: 'picture-marker',
             url: 'https://static.arcgis.com/images/Symbols/Government/Damaged-Public-Facilities-Category-C.png',
@@ -298,7 +306,8 @@ export class FeaturesMapService {
             width: '15px',
             height: '15px',
           },
-        }, {
+        },
+        {
           value: 'باب',
           symbol: {
             type: 'picture-marker',
@@ -306,7 +315,8 @@ export class FeaturesMapService {
             width: '15px',
             height: '15px',
           },
-        }],
+        },
+      ],
     };
     // let PointSymbol: any = {
     //   type: 'simple',
@@ -386,14 +396,14 @@ export class FeaturesMapService {
   }
 
   Feature_sheraLinesTourism(mapInstance: Map, trans: number) {
-    var lineSymbol:any = {
-      type: "simple",
+    var lineSymbol: any = {
+      type: 'simple',
       symbol: {
-        type: "simple-line",
-        cap: "round",
+        type: 'simple-line',
+        cap: 'round',
         color: [0, 0, 255, 1],
-        width: "5px",
-        style: "solid",
+        width: '5px',
+        style: 'solid',
       },
     };
 
@@ -406,14 +416,14 @@ export class FeaturesMapService {
   }
 
   Feature_RiyadhLinesTourism(mapInstance: Map, trans: number) {
-    var lineSymbol:any = {
-      type: "simple",
+    var lineSymbol: any = {
+      type: 'simple',
       symbol: {
-        type: "simple-line",
-        cap: "round",
+        type: 'simple-line',
+        cap: 'round',
         color: [255, 165, 0, 1],
-        width: "5px",
-        style: "solid",
+        width: '5px',
+        style: 'solid',
       },
     };
     this.RiyadhLines = new FeatureLayer({
@@ -425,14 +435,14 @@ export class FeaturesMapService {
   }
 
   FeatureKharjLinesTourism(mapInstance: Map, trans: number) {
-    var lineSymbol:any = {
-      type: "simple",
+    var lineSymbol: any = {
+      type: 'simple',
       symbol: {
-        type: "simple-line",
-        cap: "round",
-        color: [255,0,255, 1],
-        width: "5px",
-        style: "solid",
+        type: 'simple-line',
+        cap: 'round',
+        color: [255, 0, 255, 1],
+        width: '5px',
+        style: 'solid',
       },
     };
     this.KharjLines = new FeatureLayer({
@@ -444,14 +454,14 @@ export class FeaturesMapService {
   }
 
   FeatureAl_MajmaLinesTourism(mapInstance: Map, trans: number) {
-    var lineSymbol:any = {
-      type: "simple",
+    var lineSymbol: any = {
+      type: 'simple',
       symbol: {
-        type: "simple-line",
-        cap: "round",
+        type: 'simple-line',
+        cap: 'round',
         color: [0, 255, 255, 1],
-        width: "5px",
-        style: "solid",
+        width: '5px',
+        style: 'solid',
       },
     };
     this.Al_MajmaLines = new FeatureLayer({
@@ -463,14 +473,14 @@ export class FeaturesMapService {
   }
 
   FeatureSadirLinesTourism(mapInstance: Map, trans: number) {
-    var lineSymbol:any = {
-      type: "simple",
+    var lineSymbol: any = {
+      type: 'simple',
       symbol: {
-        type: "simple-line",
-        cap: "round",
-        color: [255,0,0, 1],
-        width: "5px",
-        style: "solid",
+        type: 'simple-line',
+        cap: 'round',
+        color: [255, 0, 0, 1],
+        width: '5px',
+        style: 'solid',
       },
     };
     this.SadirLines = new FeatureLayer({
