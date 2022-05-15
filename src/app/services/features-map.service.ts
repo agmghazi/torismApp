@@ -105,12 +105,21 @@ export class FeaturesMapService {
           symbol: {
             type: 'picture-marker',
             url: 'http://static.arcgis.com/images/Symbols/Basic1/Black_Museum.png',
-            width: '25px',
-            height: '25px',
+            width: '15px',
+            height: '15px',
           },
         },
         {
           value: 'سوق',
+          symbol: {
+            type: 'picture-marker',
+            url: 'https://static.arcgis.com/images/Symbols/Government/Homeless-Food-Assistance.png',
+            width: '15px',
+            height: '15px',
+          },
+        },
+        {
+          value: 'قرية تاريخه',
           symbol: {
             type: 'picture-marker',
             url: 'https://static.arcgis.com/images/Symbols/Government/Homeless-Food-Assistance.png',
