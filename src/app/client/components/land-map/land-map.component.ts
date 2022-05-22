@@ -97,7 +97,7 @@ export class LandMapComponent implements OnInit {
     this.openStaticPages();
     this.getAttributeData();
     this.searchBar();
-    // this.createPathsWithLength();
+    this.createPathsWithLength();
   }
 
   searchBar() {

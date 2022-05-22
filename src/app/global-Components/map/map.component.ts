@@ -56,7 +56,10 @@ export class MapComponent implements OnInit {
       this.featuresService.map.basemap.baseLayers.getItemAt(0).opacity = 0;
     });
 
-    // this.featuresService.graphicsLayer = new GraphicsLayer();
+    this.featuresService.graphicsLayer = new GraphicsLayer();
+    // @ts-ignore
+    this.featuresService.graphicsLayer.title = 'طبقه قياس مسافات';
+
     //  (window as any)._graphic = this.featuresService.graphicsLayer;
     this.shareDataService.isLoadService.subscribe((result) => {});
 
